@@ -36,13 +36,10 @@ public class Constants {
 	public static final int MENU_STATE = 0;
 	public static final int LEVELS_STATE = 1;
 	public static final String GAME_MENU_BACKGROUND = "/World/Menu.png";
-	public static final String GAME_LEVELS_BETA = "/World/beta2.png";
 	public static final String GAME_LEVEL_1_SKY = "/World/Level-1-Sky.png";
-	public static final String GAME_BACKGROUND_1 ="/World/Blvl1.png";
-	public static final String GAME_BACKGRAOUND_LEVEL_1 = "/world/lvl1.png";
 	public static final String BLOCK_1  = "/World/tileset.png";
-	public static final String GAME_LEVEL_1_IMAGE = "/World/level2.png";
-	
+	public static final String GAME_LEVEL_1_IMAGE = "/World/level-1.png";
+	public static final String GAME_MENU_SCREEN = "/World/MenuScreen.png";
 	
 }
 

@@ -43,7 +43,7 @@ public class Menu extends GameObject{
 
 
 	public void render(Graphics g) {
-		g.drawImage(texture.Menu[0], 0, 0, Constants.GAME_WINDOW_WIDTH + 10, Constants.GAME_WINDOW_HEIGHT + 10, null);
+		g.drawImage(texture.menuBackground[0], 0, 0, Constants.GAME_WINDOW_WIDTH + 10, Constants.GAME_WINDOW_HEIGHT + 10, null);
 		
 		g.setFont(font);
 		for(int i = 0; i < options.length; i++) {

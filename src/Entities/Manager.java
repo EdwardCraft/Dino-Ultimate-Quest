@@ -34,10 +34,11 @@ public class Manager{
 	
 	public void loadScreen(int state){
 		if(state == Constants.MENU_STATE){
-			loadingImages(texture.levels[0]);
+			loadingImages(texture.Menu[0]);
 		}
 		else if(state == Constants.LEVELS_STATE){
-			loadingImages(texture.levels[Constants.LEVELS]);
+			System.out.println(Constants.LEVELS);
+			switchLevel();
 		}
 	}
 	
@@ -50,8 +51,8 @@ public class Manager{
 		
 		switch(Constants.LEVELS)
 		{
-			case 1:
-				loadingImages(texture.levels[Constants.LEVELS]);
+			case 1:			
+				loadingImages(texture.Level1Game);
 			break;
 			case 2:
 				loadingImages(texture.levels[Constants.LEVELS]);
@@ -125,7 +126,7 @@ public class Manager{
 		
 		//where looping through every single pixel on the image
 		for(int i = 0;i < height; i++)
-		{
+		{		
 			for(int j = 0;j < width; j++)
 			{
 				int pixel = image.getRGB(i,j);
@@ -138,7 +139,7 @@ public class Manager{
 				if(red == 129 && green == 243 && blue == 158) addObject(new Block(i * 32, j * 32,1,ObjectId.Block));
 				if(red == 161 && green == 134 && blue == 190) addObject(new Reset(i * 32, j * 32,ObjectId.Reset));
 				if(red == 0 && green == 0 && blue == 255) addObject(new Player(i * 32, j * 32,this,camera,ObjectId.Player));
-			}
+			}		
 		}
 
 	}

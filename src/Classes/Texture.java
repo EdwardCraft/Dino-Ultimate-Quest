@@ -8,14 +8,15 @@ import Utils.Constants;
 
 public class Texture{
 
-	SpriteSheet blockSprite,playerSpriteIdle,palyerMovingSprite,levelSprite;
+	SpriteSheet blockSprite,playerSpriteIdle,palyerMovingSprite,levelSprite, MenuSprite;
 	BufferedImageLoader imageloader;
 	
 	private BufferedImage blockSheet   = null;
 	private BufferedImage playerIdleSheet  = null;
 	private BufferedImage palyerRunnigSheet  = null;
 	private BufferedImage levelSheet = null;
-
+	private BufferedImage MenuSheet = null; 
+	public  BufferedImage Level1Game = null;
 	
 	public BufferedImage[] block   =  new BufferedImage[3];
 	public BufferedImage[] player  =  new BufferedImage[17];
@@ -24,6 +25,7 @@ public class Texture{
 	public BufferedImage[] levelBarckground = new BufferedImage[3];
 	public BufferedImage[] SkyBackground = new BufferedImage[3];
 	public BufferedImage[] Menu = new BufferedImage[3];
+	public BufferedImage[] menuBackground = new BufferedImage[1];
 	
 	public Texture(){
 
@@ -34,10 +36,11 @@ public class Texture{
 			blockSheet  = imageloader.loadImage(Constants.BLOCK_1);
 			playerIdleSheet = imageloader.loadImage(Constants.PLAYER_IDLE_SPRITES);
 			palyerRunnigSheet = imageloader.loadImage(Constants.PLAYER_RUNNING_SPRITES);
-			levelSheet = imageloader.loadImage(Constants.GAME_LEVELS_BETA);
-			levelBarckground[0] = imageloader.loadImage(Constants.GAME_BACKGRAOUND_LEVEL_1);
+
 			SkyBackground[0] = imageloader.loadImage(Constants.GAME_LEVEL_1_SKY);
-			Menu[0] = imageloader.loadImage(Constants.GAME_MENU_BACKGROUND);
+			MenuSheet = imageloader.loadImage(Constants.GAME_MENU_SCREEN);
+			menuBackground[0] = imageloader.loadImage(Constants.GAME_MENU_BACKGROUND);
+			Level1Game = imageloader.loadImage(Constants.GAME_LEVEL_1_IMAGE);
 			
 		}catch(Exception e)
 		{
@@ -48,7 +51,7 @@ public class Texture{
 		blockSprite = new SpriteSheet(blockSheet);
 		playerSpriteIdle = new SpriteSheet(playerIdleSheet);
 		palyerMovingSprite = new SpriteSheet(palyerRunnigSheet);
-
+		MenuSprite = new SpriteSheet(MenuSheet);
 		getTextures();
 
 	}
@@ -56,9 +59,8 @@ public class Texture{
 	
 	private void getTextures(){	
 		
-		levels[0]  = levelSprite.grabImage(1,1, 100, 100);
-		levels[1]  = levelSprite.grabImage(2,1, 100, 100);
-		
+		Menu[0] =  MenuSprite.grabImage(1, 1, 1, 1);
+			
 		block[0]   = blockSprite.grabImage(1,2,32,32);//dirt block
 		block[1]   = blockSprite.grabImage(2,2,32,32);// grass
 

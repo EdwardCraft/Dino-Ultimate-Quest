@@ -2,7 +2,6 @@ package FrameWork;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import Entities.Manager;
-import java.awt.event.KeyListener;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
 import Utils.Constants;
@@ -24,9 +23,9 @@ public class KeyInput extends KeyAdapter{
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			gameObject = manager.gameObjects.get(i);
 			if(gameObject.getObjectId() == ObjectId.Player){
-				if(key == KeyEvent.VK_D) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
-				if(key == KeyEvent.VK_A) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
-				if(key == KeyEvent.VK_S) gameObject.setVelocityY(Constants.PLAYER_MOVEMENT_SPEDD);
+				if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
+				if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
+				//if(key == KeyEvent.VK_DOWN) gameObject.setVelocityY(Constants.PLAYER_MOVEMENT_SPEDD);
 				if(key == KeyEvent.VK_SPACE && !gameObject.isJumping()){
 					
 					gameObject.setJumping(true);
@@ -39,13 +38,13 @@ public class KeyInput extends KeyAdapter{
 		   gameObject = manager.gameObjects.get(i);
 			   if(gameObject.getObjectId() == ObjectId.Menu){
 				   if(key == KeyEvent.VK_ENTER) gameObject.select();
-				   if(key == KeyEvent.VK_W) {
+				   if(key == KeyEvent.VK_UP) {
 					   gameObject.currentChoice --;
 					   if(gameObject.currentChoice == -1){
 						   gameObject.currentChoice = gameObject.options.length - 1;
 					   }
 				   }
-				   if(key == KeyEvent.VK_S) {
+				   if(key == KeyEvent.VK_DOWN) {
 					   gameObject.currentChoice ++;
 					   if(gameObject.currentChoice == gameObject.options.length) {
 						   gameObject.currentChoice = 0;
@@ -63,10 +62,10 @@ public class KeyInput extends KeyAdapter{
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			gameObject = manager.gameObjects.get(i);
 			if(gameObject.getObjectId() == ObjectId.Player){
-				if(key == KeyEvent.VK_D) gameObject.setVelocityX(0);
-				if(key == KeyEvent.VK_A) gameObject.setVelocityX(0);
+				if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(0);
+				if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(0);
 				if(key == KeyEvent.VK_W) gameObject.setVelocityY(0);
-				if(key == KeyEvent.VK_S) gameObject.setVelocityY(0);
+				//if(key == KeyEvent.VK_S) gameObject.setVelocityY(0);
 				
 			}
 		}
