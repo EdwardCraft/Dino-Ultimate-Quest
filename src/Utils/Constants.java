@@ -40,6 +40,7 @@ public class Constants {
 	public static final String BLOCK_1  = "/World/tileset.png";
 	public static final String GAME_LEVEL_1_IMAGE = "/World/level-1.png";
 	public static final String GAME_MENU_SCREEN = "/World/MenuScreen.png";
+	public static final String GAME_LEVEL_1_TREES = "/World/lvl1.png";
 	
 }
 

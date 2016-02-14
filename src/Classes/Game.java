@@ -135,9 +135,18 @@ public class Game extends Canvas implements Runnable{
 
 	    graphics.setColor(new Color(90,194,250));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
-	    //graphics.drawImage(texture.SkyBackground[Game.LEVEL], 0, 0,Constants.GAME_WINDOW_WIDTH + 10,Constants.GAME_WINDOW_HEIGHT + 10,null);
-	    graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
-
+	    //graphics.drawImage(texture.SkyBackground[Game.LEVEL], 0, 0,Constants.GAME_WINDOW_WIDTH + 10,Constants.GAME_WINDOW_HEIGHT + 10,null)
+	    if(Constants.LEVELS == 1){
+	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
+	    			Constants.GAME_WINDOW_WIDTH + 10, 
+	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
+	    }
+	    
+	    if(playerCamera.getPositionX() < 0){
+	    	 graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
+	    }
+	   
+	    System.out.println(Constants.LEVELS);
 
 	    manager.render(graphics);
 

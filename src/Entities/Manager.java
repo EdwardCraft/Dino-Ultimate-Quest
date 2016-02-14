@@ -64,7 +64,8 @@ public class Manager{
 			break;
 
 		}
-			Constants.LEVELS ++;		
+		
+				
 	}
 	
 	
@@ -133,6 +134,7 @@ public class Manager{
 				int red   = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8)  &  0xff;
 				int blue  = (pixel) & 0xff;
+				if(red == 0 && green == 97 && blue == 11) addObject(new LevelOne(i * 32, j * 32,ObjectId.LevelOne));
 				if(red == 255 && green == 0 && blue == 0) addObject(new Menu(i * 32, j * 32,this, ObjectId.Menu));
 				if(red == 255 && green == 255 && blue == 0) addObject(new Flag(i * 32, j * 32,ObjectId.Flag));
 				if(red == 255 && green == 255 && blue == 255) addObject(new Block(i * 32, j * 32,0,ObjectId.Block));

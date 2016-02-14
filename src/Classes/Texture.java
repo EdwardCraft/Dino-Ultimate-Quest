@@ -38,6 +38,7 @@ public class Texture{
 			palyerRunnigSheet = imageloader.loadImage(Constants.PLAYER_RUNNING_SPRITES);
 
 			SkyBackground[0] = imageloader.loadImage(Constants.GAME_LEVEL_1_SKY);
+			SkyBackground[1] = imageloader.loadImage(Constants.GAME_LEVEL_1_TREES);
 			MenuSheet = imageloader.loadImage(Constants.GAME_MENU_SCREEN);
 			menuBackground[0] = imageloader.loadImage(Constants.GAME_MENU_BACKGROUND);
 			Level1Game = imageloader.loadImage(Constants.GAME_LEVEL_1_IMAGE);

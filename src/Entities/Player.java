@@ -74,10 +74,14 @@ public class Player extends GameObject{
 
 
 	public void update(LinkedList<GameObject> object){
-		
+
 		x += velocity_X;
 		y += velocity_Y;
-
+		
+		if(x <= 0 ){
+			x = 0;
+		}
+		
 		if(falling || jumping){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
 			//velocity_X += Constants.PLAYER_GRAVITY_ACCELERATION;

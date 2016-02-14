@@ -8,6 +8,7 @@ public enum ObjectId {
 	Flag(),
 	Reset(),
 	Enemy(),
-	Menu();
+	Menu(),
+	LevelOne();
 	
 }	
