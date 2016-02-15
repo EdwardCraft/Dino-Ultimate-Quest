@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import Classes.Game;
 import Entities.Manager;
+import Entities.Pause;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
 import Utils.Constants;
@@ -31,6 +32,7 @@ public class KeyInput extends KeyAdapter{
 				if(key == KeyEvent.VK_ENTER){
 					if(Constants.PAUSE == 0){
 						Game.thread.suspend();
+						manager.addObject(new Pause(0, 0, ObjectId.Pause));
 						Constants.PAUSE = 1;
 					}else{
 						Game.thread.resume();
@@ -67,13 +69,6 @@ public class KeyInput extends KeyAdapter{
 		   
 	   }
 	   
-	   /*for(int i = 0; i < manager.gameObjects.size(); i++){
-		   gameObject = manager.gameObjects.get(i);
-			   if(gameObject.getObjectId() == ObjectId.LevelOne){
-				   if(key == KeyEvent.VK_ENTER)gameObject.currentChoice = 0;
-			   }
-		   
-	   }*/
 
 	}
 
@@ -86,7 +81,6 @@ public class KeyInput extends KeyAdapter{
 				if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(0);
 				if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(0);
 				if(key == KeyEvent.VK_W) gameObject.setVelocityY(0);
-				//if(key == KeyEvent.VK_S) gameObject.setVelocityY(0);
 				
 			}
 		}

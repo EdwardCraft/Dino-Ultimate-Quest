@@ -1,5 +1,7 @@
 package Entities;
 import java.util.LinkedList;
+import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
+
 import FrameWork.GameObject;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -103,11 +105,12 @@ public class Manager{
 	
 	
 	public void render(Graphics g){	
-		for(int i = 0; i < gameObjects.size(); i ++ ){
-			tempObject = gameObjects.get(i);
-			tempObject.render(g);
-		}
-		
+	
+			for(int i = 0; i < gameObjects.size(); i ++ ){
+				tempObject = gameObjects.get(i);
+				tempObject.render(g);
+			}
+			
 	}
 
 
