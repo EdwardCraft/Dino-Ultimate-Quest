@@ -22,7 +22,7 @@ import java.awt.Graphics2D;
 public class Game extends Canvas implements Runnable{
 
 	private boolean running;
-	private Thread thread;
+	public static Thread thread;
 
 	BufferStrategy bufferStrategy;
 	Graphics graphics;
@@ -97,7 +97,7 @@ public class Game extends Canvas implements Runnable{
 			
 		if(System.currentTimeMillis() - timer > 1000){
 			timer += 1000;
-			System.out.println("FPS: " + updates);
+			//System.out.println("FPS: " + updates);
 			frames = 0;
 			updates = 0;
 			}
@@ -146,8 +146,6 @@ public class Game extends Canvas implements Runnable{
 	    	 graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
 	    }
 	   
-	    System.out.println(Constants.LEVELS);
-
 	    manager.render(graphics);
 
 

@@ -69,7 +69,7 @@ public abstract class GameObject {
 		this.jumping = jumping;
 	}
 	
-	
+	public void setCurrentChoise(int currentChoice){this.currentChoice = currentChoice;}
 
 	
 

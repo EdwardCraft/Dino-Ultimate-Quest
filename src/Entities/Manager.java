@@ -33,11 +33,13 @@ public class Manager{
 	}
 	
 	public void loadScreen(int state){
+		System.out.println(state);
 		if(state == Constants.MENU_STATE){
+			clearLevel();
 			loadingImages(texture.Menu[0]);
 		}
 		else if(state == Constants.LEVELS_STATE){
-			System.out.println(Constants.LEVELS);
+
 			switchLevel();
 		}
 	}

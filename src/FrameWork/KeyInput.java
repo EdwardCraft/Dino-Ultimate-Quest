@@ -1,6 +1,8 @@
 package FrameWork;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import Classes.Game;
 import Entities.Manager;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
@@ -17,6 +19,7 @@ public class KeyInput extends KeyAdapter{
 	}
 
 
+	@SuppressWarnings("deprecation")
 	public void keyPressed(KeyEvent e){
 		int  key  = e.getKeyCode();
 		
@@ -25,7 +28,17 @@ public class KeyInput extends KeyAdapter{
 			if(gameObject.getObjectId() == ObjectId.Player){
 				if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
 				if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
-				//if(key == KeyEvent.VK_DOWN) gameObject.setVelocityY(Constants.PLAYER_MOVEMENT_SPEDD);
+				if(key == KeyEvent.VK_ENTER){
+					if(Constants.PAUSE == 0){
+						Game.thread.suspend();
+						Constants.PAUSE = 1;
+					}else{
+						Game.thread.resume();
+						Constants.PAUSE = 0;
+					}
+					
+				}
+
 				if(key == KeyEvent.VK_SPACE && !gameObject.isJumping()){
 					
 					gameObject.setJumping(true);
@@ -53,6 +66,14 @@ public class KeyInput extends KeyAdapter{
 			   }
 		   
 	   }
+	   
+	   /*for(int i = 0; i < manager.gameObjects.size(); i++){
+		   gameObject = manager.gameObjects.get(i);
+			   if(gameObject.getObjectId() == ObjectId.LevelOne){
+				   if(key == KeyEvent.VK_ENTER)gameObject.currentChoice = 0;
+			   }
+		   
+	   }*/
 
 	}
 

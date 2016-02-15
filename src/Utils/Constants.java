@@ -31,6 +31,7 @@ public class Constants {
 	public static final String GAME_LEVEL_1_AUDIO = "/Music/prueba.mp3";
 	
 	//level's
+	public static int PAUSE = 0;
 	public static int LEVELS = 1;
 	public static final int NUMBER_GAME_STATES = 2;
 	public static final int MENU_STATE = 0;
