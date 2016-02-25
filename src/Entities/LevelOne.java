@@ -7,16 +7,15 @@ import java.util.LinkedList;
 import Classes.Game;
 import Classes.Texture;
 import FrameWork.GameObject;
+import FrameWork.Hud;
 import FrameWork.ObjectId;
 
 
 public class LevelOne extends GameObject{
 	Texture texture;
-	
 	public LevelOne(float x, float y, ObjectId id) {
 		super(x, y, id);
 		texture = Game.getTexture();
-		
 	}
 
 
@@ -30,7 +29,7 @@ public class LevelOne extends GameObject{
 		for(int i = 0; i < texture.SkyBackground[1].getWidth() * 4 ; i += texture.SkyBackground[1].getWidth()){
 			g.drawImage(texture.SkyBackground[1], i, 0, null);
 		}
-		
+	 
 		
 	}
 

@@ -14,6 +14,7 @@ import java.awt.Color;
 import Entities.Manager; 
 import FrameWork.ObjectId;
 import Entities.Player;
+import FrameWork.Hud;
 import FrameWork.KeyInput;
 import Utils.PlayerCam;
 import java.awt.Graphics2D;
@@ -29,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 	Graphics2D graphics2D;
 	Manager manager;
 	PlayerCam playerCamera;
-	
+	Hud hud;
 	GameAudio gameAudio;
 	BufferedImageLoader imageLoader;
 	static Texture texture;
@@ -40,7 +41,7 @@ public class Game extends Canvas implements Runnable{
 		running = false;
 		gameAudio = new GameAudio(Constants.GAME_LEVEL_1_AUDIO);
 		imageLoader = new BufferedImageLoader();
-
+		hud = new Hud();
 		//gameAudio.play();
 	}
 
@@ -135,11 +136,11 @@ public class Game extends Canvas implements Runnable{
 
 	    graphics.setColor(new Color(90,194,250));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
-	    //graphics.drawImage(texture.SkyBackground[Game.LEVEL], 0, 0,Constants.GAME_WINDOW_WIDTH + 10,Constants.GAME_WINDOW_HEIGHT + 10,null)
-	    if(Constants.LEVELS == 1){
+	    if(Constants.LEVELS != 0){
 	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
 	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
+	    	        hud.render(graphics);
 	    }
 	    
 	    if(playerCamera.getPositionX() < 0){

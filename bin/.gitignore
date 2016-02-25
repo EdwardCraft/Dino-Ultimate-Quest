@@ -1,9 +1,5 @@
-/Audio/
-/Classes/
-/Entities/
 /FrameWork/
-/Main/
-/Music/
-/Player/
+/hud/
+/Classes/
 /Utils/
-/World/
+/Entities/
