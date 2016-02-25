@@ -51,7 +51,7 @@ public class Game extends Canvas implements Runnable{
 		playerCamera = new PlayerCam(0,0);
 		manager = new Manager(playerCamera);
 		this.addKeyListener(new KeyInput(manager));
-		hud = new Hud(manager);
+		hud = new Hud();
 	}
 
 
@@ -97,7 +97,6 @@ public class Game extends Canvas implements Runnable{
 			
 		if(System.currentTimeMillis() - timer > 1000){
 			timer += 1000;
-			//System.out.println("FPS: " + updates);
 			frames = 0;
 			updates = 0;
 			}
@@ -140,6 +139,7 @@ public class Game extends Canvas implements Runnable{
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
 	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
 	    			hud.render(graphics);
+	    			hud.setHelth(manager.getPlayer().gethealth());
 	    }
 	    	
 		    if(playerCamera.getPositionX() < 0){

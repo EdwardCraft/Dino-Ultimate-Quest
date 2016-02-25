@@ -12,6 +12,7 @@ public class Constants {
 	//Player
 	public static final int PLAYER_RECTANGLE_WIDTH = 100;
 	public static final int PLAYER_RECTANGLE_HEIGHT = 100;
+	public static final int PLAYER_HEALTH = 262;
 	public static final float PLAYER_GRAVITY_ACCELERATION = 0.5f;
 	public static final float PLAYER_MOVEMENT_SPEDD = 10;
 	public static final float PLAYER_JUMP_HIGHT = 10;

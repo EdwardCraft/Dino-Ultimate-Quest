@@ -17,6 +17,7 @@ public abstract class GameObject {
 	protected boolean falling;
 	protected boolean jumping;
 	protected int currentChoice;
+	protected int health;
 	protected final String[] options = {
 			"Start",
 			"Help",

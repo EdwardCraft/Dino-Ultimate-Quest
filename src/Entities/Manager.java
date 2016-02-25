@@ -37,7 +37,6 @@ public class Manager{
 	}
 	
 	public void loadScreen(int state){
-		System.out.println(state);
 		if(state == Constants.MENU_STATE){
 			clearLevel();
 			loadingImages(texture.Menu[0]);
@@ -146,19 +145,19 @@ public class Manager{
 				if(red == 255 && green == 255 && blue == 255) addObject(new Block(i * 32, j * 32,0,ObjectId.Block));
 				if(red == 129 && green == 243 && blue == 158) addObject(new Block(i * 32, j * 32,1,ObjectId.Block));
 				if(red == 161 && green == 134 && blue == 190) addObject(new Reset(i * 32, j * 32,ObjectId.Reset));
-				if(red == 0 && green == 0 && blue == 255){ 
-					player = new Player(i * 32, j * 32,this,camera,ObjectId.Player);
+				if(red == 0 && green == 0 && blue == 255){
+					player = new Player(i * 32, j * 32,this,camera,ObjectId.Player); 
 					addObject(player);
 				}
-				if(red == 0 && green == 97 && blue == 11){
-					lvlOne = new LevelOne(i * 32, j * 32,ObjectId.LevelOne);
-					addObject(lvlOne);
-				}
+				if(red == 0 && green == 97 && blue == 11)addObject(new LevelOne(i * 32, j * 32,ObjectId.LevelOne));
+				
 			}		
 		}
 
 	}
-	
+	public Player getPlayer(){
+		return player;
+	}
 	public LevelOne getlevel(){
 		return lvlOne;
 	}

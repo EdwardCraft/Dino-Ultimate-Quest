@@ -38,7 +38,7 @@ public class Player extends GameObject{
 	private Animation palyerjump;
 	private Animation palyerFall;
 	private Animation playerRun;
-	private int health;
+
 	
 	public Player(float x, float y, Manager manager,PlayerCam camera,ObjectId id){
 		super(x, y, id);
@@ -69,23 +69,30 @@ public class Player extends GameObject{
 
 		facing = Facing.LEFT;
 		jumpState = JumpState.FALLING;
-		health = 100;
+		health = Constants.PLAYER_HEALTH;
+	
 	}
 
 
 
 	public void update(LinkedList<GameObject> object){
 
-		x += velocity_X;
-		y += velocity_Y;
+
+		if(facing == Facing.LEFT){
+			x +=velocity_X;
+		}else if(facing == Facing.RIGHT){
+			x +=velocity_X;
+		}
+		if(jumping){
+			y += velocity_Y;
+		}
 		
 		if(x <= 0 ){
 			x = 0;
-		}
+		}	
 		
 		if(falling || jumping){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
-			//velocity_X += Constants.PLAYER_GRAVITY_ACCELERATION;
 		}
 		
 		if(velocity_X < 0){
@@ -218,9 +225,8 @@ public class Player extends GameObject{
 		
 	}
 
-	public int getHealth(){
-		return health;
+	public int gethealth(){
+		return  health;
 	}
-
 
 } 
