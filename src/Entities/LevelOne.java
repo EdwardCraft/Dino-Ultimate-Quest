@@ -12,7 +12,7 @@ import FrameWork.ObjectId;
 
 
 public class LevelOne extends GameObject{
-	Texture texture;
+	private Texture texture;
 	public LevelOne(float x, float y, ObjectId id) {
 		super(x, y, id);
 		texture = Game.getTexture();
@@ -28,9 +28,7 @@ public class LevelOne extends GameObject{
 	public void render(Graphics g) {
 		for(int i = 0; i < texture.SkyBackground[1].getWidth() * 4 ; i += texture.SkyBackground[1].getWidth()){
 			g.drawImage(texture.SkyBackground[1], i, 0, null);
-		}
-	 
-		
+		}		
 	}
 
 
@@ -44,5 +42,7 @@ public class LevelOne extends GameObject{
 		// TODO Auto-generated method stub
 		
 	}
+	
+
 
 }

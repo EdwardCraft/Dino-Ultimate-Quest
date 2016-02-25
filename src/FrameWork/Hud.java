@@ -6,15 +6,16 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import Entities.Manager;
 import Entities.Player;
 import Utils.Constants;
 
 public class Hud {
 	private Player player;
 	private BufferedImage hud;
-	
-	public Hud(){
-		//this.player = player;
+	private Manager manager;
+	public Hud(Manager manager){
+		this.manager = manager;
 		try {
 			hud = ImageIO.read(
 				getClass().getResourceAsStream(
@@ -28,7 +29,10 @@ public class Hud {
 	}
 
 
-
+	public void update(){
+		
+	}
+	
 	public void render(Graphics g) {
 		
 		g.drawImage(hud, 0, 10,null);

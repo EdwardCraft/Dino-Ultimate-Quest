@@ -38,7 +38,7 @@ public class Player extends GameObject{
 	private Animation palyerjump;
 	private Animation palyerFall;
 	private Animation playerRun;
-
+	private int health;
 	
 	public Player(float x, float y, Manager manager,PlayerCam camera,ObjectId id){
 		super(x, y, id);
@@ -69,6 +69,7 @@ public class Player extends GameObject{
 
 		facing = Facing.LEFT;
 		jumpState = JumpState.FALLING;
+		health = 100;
 	}
 
 
@@ -217,7 +218,9 @@ public class Player extends GameObject{
 		
 	}
 
-
+	public int getHealth(){
+		return health;
+	}
 
 
 } 

@@ -22,6 +22,8 @@ public class Manager{
 	BufferedImageLoader imageLoader;
 	Texture texture;
 	private int currentState;
+	private Player player;
+	private LevelOne lvlOne;
 	
 	public Manager(PlayerCam camera){
 
@@ -139,17 +141,30 @@ public class Manager{
 				int red   = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8)  &  0xff;
 				int blue  = (pixel) & 0xff;
-				if(red == 0 && green == 97 && blue == 11) addObject(new LevelOne(i * 32, j * 32,ObjectId.LevelOne));
 				if(red == 255 && green == 0 && blue == 0) addObject(new Menu(i * 32, j * 32,this, ObjectId.Menu));
 				if(red == 255 && green == 255 && blue == 0) addObject(new Flag(i * 32, j * 32,ObjectId.Flag));
 				if(red == 255 && green == 255 && blue == 255) addObject(new Block(i * 32, j * 32,0,ObjectId.Block));
 				if(red == 129 && green == 243 && blue == 158) addObject(new Block(i * 32, j * 32,1,ObjectId.Block));
 				if(red == 161 && green == 134 && blue == 190) addObject(new Reset(i * 32, j * 32,ObjectId.Reset));
-				if(red == 0 && green == 0 && blue == 255) addObject(new Player(i * 32, j * 32,this,camera,ObjectId.Player));
+				if(red == 0 && green == 0 && blue == 255){ 
+					player = new Player(i * 32, j * 32,this,camera,ObjectId.Player);
+					addObject(player);
+				}
+				if(red == 0 && green == 97 && blue == 11){
+					lvlOne = new LevelOne(i * 32, j * 32,ObjectId.LevelOne);
+					addObject(lvlOne);
+				}
 			}		
 		}
 
 	}
-
+	
+	public LevelOne getlevel(){
+		return lvlOne;
+	}
+	
+	public int getCurrentState(){
+		return currentState;
+	}
 
 }

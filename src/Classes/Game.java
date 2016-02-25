@@ -41,7 +41,6 @@ public class Game extends Canvas implements Runnable{
 		running = false;
 		gameAudio = new GameAudio(Constants.GAME_LEVEL_1_AUDIO);
 		imageLoader = new BufferedImageLoader();
-		hud = new Hud();
 		//gameAudio.play();
 	}
 
@@ -52,7 +51,7 @@ public class Game extends Canvas implements Runnable{
 		playerCamera = new PlayerCam(0,0);
 		manager = new Manager(playerCamera);
 		this.addKeyListener(new KeyInput(manager));
-
+		hud = new Hud(manager);
 	}
 
 
@@ -136,23 +135,27 @@ public class Game extends Canvas implements Runnable{
 
 	    graphics.setColor(new Color(90,194,250));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
-	    if(Constants.LEVELS != 0){
+	    if(manager.getCurrentState() != Constants.MENU_STATE){
 	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
 	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
-	    	        hud.render(graphics);
+	    			hud.render(graphics);
 	    }
+	    	
+		    if(playerCamera.getPositionX() < 0){
+		    	 graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
+		    }
+		   
+		    manager.render(graphics);
+
+
+		    graphics2D.translate( -playerCamera.getPositionX(),  -playerCamera.getPositionY());
+			dispose();
+			bufferStrategy.show();
+	    	
+	  
 	    
-	    if(playerCamera.getPositionX() < 0){
-	    	 graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
-	    }
-	   
-	    manager.render(graphics);
 
-
-	    graphics2D.translate( -playerCamera.getPositionX(),  -playerCamera.getPositionY());
-		dispose();
-		bufferStrategy.show();
 
 	}
 
