@@ -6,13 +6,14 @@ public class Constants {
 	public static final int GAME_WINDOW_WIDTH = 1000;
 	public static final int GAME_WINDOW_HEIGHT = 600;
 	public static final String GAME_NAME = "POAGAME";
-
+	public static final int GAME_WORLD_OFFSET = 300;
 
 
 	//Player
 	public static final int PLAYER_RECTANGLE_WIDTH = 100;
 	public static final int PLAYER_RECTANGLE_HEIGHT = 100;
 	public static final int PLAYER_HEALTH = 262;
+	public static int health = 262;
 	public static final float PLAYER_GRAVITY_ACCELERATION = 0.5f;
 	public static final float PLAYER_MOVEMENT_SPEDD = 10;
 	public static final float PLAYER_JUMP_HIGHT = 10;
@@ -32,7 +33,7 @@ public class Constants {
 	public static final String GAME_LEVEL_1_AUDIO = "/Music/prueba.mp3";
 	
 	//level's
-	public static int PAUSE = 0;
+	public static Boolean PAUSE = false;
 	public static int LEVELS = 1;
 	public static final int NUMBER_GAME_STATES = 2;
 	public static final int MENU_STATE = 0;

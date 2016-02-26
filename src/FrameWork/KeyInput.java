@@ -30,13 +30,10 @@ public class KeyInput extends KeyAdapter{
 				if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
 				if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
 				if(key == KeyEvent.VK_ENTER){
-					if(Constants.PAUSE == 0){
-						Game.thread.suspend();
-						manager.addObject(new Pause(0, 0, ObjectId.Pause));
-						Constants.PAUSE = 1;
+					if(Constants.PAUSE == false){
+						Constants.PAUSE = true;
 					}else{
-						Game.thread.resume();
-						Constants.PAUSE = 0;
+						Constants.PAUSE = false;
 					}
 					
 				}

@@ -69,7 +69,7 @@ public class Player extends GameObject{
 
 		facing = Facing.LEFT;
 		jumpState = JumpState.FALLING;
-		health = Constants.PLAYER_HEALTH;
+		
 	
 	}
 
@@ -225,8 +225,5 @@ public class Player extends GameObject{
 		
 	}
 
-	public int gethealth(){
-		return  health;
-	}
 
 } 

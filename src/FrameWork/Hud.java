@@ -14,7 +14,6 @@ import Utils.Constants;
 public class Hud {
 	private Player player;
 	private BufferedImage hud;
-	private int health;
 	public Hud(){
 
 		try {
@@ -27,7 +26,6 @@ public class Hud {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		health = 0;
 		
 	}
 
@@ -38,14 +36,10 @@ public class Hud {
 	
 	public void render(Graphics g) {
 		
-		g.setColor(new Color(249,99, 127));
-        g.fillRect(90,39,health,40);     
+		g.setColor(new Color(1f,0f,0f,.7f));
+        g.fillRect(90,39,Constants.health,40);     
 		g.drawImage(hud, 0, 10,null);
 	}
-	
-	public void setHelth(int health){
-		this.health = health;
-	}
-	
+		
 	
 }

@@ -107,8 +107,10 @@ public class Game extends Canvas implements Runnable{
 
 	//Everything  that updates;
 	private void update(){
+		if(Constants.PAUSE == true){
+			return;
+		}
 		manager.update();
-
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			if(manager.gameObjects.get(i).getObjectId() == ObjectId.Player){
 				playerCamera.update(manager.gameObjects.get(i));
@@ -134,25 +136,34 @@ public class Game extends Canvas implements Runnable{
 
 	    graphics.setColor(new Color(90,194,250));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
+	    
 	    if(manager.getCurrentState() != Constants.MENU_STATE){
 	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
 	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
 	    			hud.render(graphics);
-	    			hud.setHelth(manager.getPlayer().gethealth());
 	    }
-	    	
-		    if(playerCamera.getPositionX() < 0){
-		    	 graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
-		    }
+	
+	
+	    if(playerCamera.getPositionX() < 0){
+		    graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
+		}
 		   
 		    manager.render(graphics);
+		
 
+		graphics2D.translate( -playerCamera.getPositionX(),  -playerCamera.getPositionY());
+		
+	    if(Constants.PAUSE == true){
+				 graphics.setColor(new Color(0f,0f,0f,.5f));
+				 graphics.fillRect(0, 0, getWidth() + Constants.GAME_WORLD_OFFSET , getHeight());
+			 }
+	    
+		dispose();
+		bufferStrategy.show();
+		
 
-		    graphics2D.translate( -playerCamera.getPositionX(),  -playerCamera.getPositionY());
-			dispose();
-			bufferStrategy.show();
-	    	
+		
 	  
 	    
 
