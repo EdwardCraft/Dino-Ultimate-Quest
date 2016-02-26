@@ -76,17 +76,9 @@ public class Player extends GameObject{
 
 
 	public void update(LinkedList<GameObject> object){
-
-
-		if(facing == Facing.LEFT){
-			x +=velocity_X;
-		}else if(facing == Facing.RIGHT){
-			x +=velocity_X;
-		}
-		if(jumping){
-			y += velocity_Y;
-		}
-		
+		x +=velocity_X;
+		y +=velocity_Y;
+	
 		if(x <= 0 ){
 			x = 0;
 		}	

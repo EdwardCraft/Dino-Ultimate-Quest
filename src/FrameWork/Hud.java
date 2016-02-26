@@ -12,7 +12,7 @@ import Entities.Player;
 import Utils.Constants;
 
 public class Hud {
-	private Player player;
+	
 	private BufferedImage hud;
 	public Hud(){
 

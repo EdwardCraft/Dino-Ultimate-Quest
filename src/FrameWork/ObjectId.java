@@ -9,7 +9,6 @@ public enum ObjectId {
 	Reset(),
 	Enemy(),
 	Menu(),
-	LevelOne(),
-	Pause();
+	LevelOne();
 	
 }	

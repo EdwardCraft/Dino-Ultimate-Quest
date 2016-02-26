@@ -2,40 +2,40 @@ package Entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
+
+import Classes.Game;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
+import Utils.Constants;
 
-public class Pause  extends GameObject{
-
-	public Pause(float x, float y, ObjectId id) {
-		super(x, y, id);
-		// TODO Auto-generated constructor stub
+public class Pause {
+	
+	private BufferedImage pauseImange;
+	
+	
+	public Pause(){
+		try {
+			pauseImange = ImageIO.read(
+				getClass().getResourceAsStream(
+					Constants.GAME_PAUSE
+				)
+			);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
-
-	@Override
-	public void update(LinkedList<GameObject> object) {
-		// TODO Auto-generated method stub
-		
+	
+	
+	public void render(Graphics g){
+		g.drawImage(pauseImange, 
+				(Constants.GAME_WINDOW_WIDTH - 270) / 2, 
+				(Constants.GAME_WINDOW_HEIGHT - 300 ) / 2, null);
 	}
-
-	@Override
-	public void render(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void select() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 }

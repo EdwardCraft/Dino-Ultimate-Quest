@@ -11,7 +11,8 @@ import Audio.GameAudio;
 
 import java.awt.Graphics;
 import java.awt.Color;
-import Entities.Manager; 
+import Entities.Manager;
+import Entities.Pause;
 import FrameWork.ObjectId;
 import Entities.Player;
 import FrameWork.Hud;
@@ -34,13 +35,14 @@ public class Game extends Canvas implements Runnable{
 	GameAudio gameAudio;
 	BufferedImageLoader imageLoader;
 	static Texture texture;
-	
+	private Pause pause;
 
 	public Game(){
 
 		running = false;
 		gameAudio = new GameAudio(Constants.GAME_LEVEL_1_AUDIO);
 		imageLoader = new BufferedImageLoader();
+		pause = new Pause();
 		//gameAudio.play();
 	}
 
@@ -107,9 +109,11 @@ public class Game extends Canvas implements Runnable{
 
 	//Everything  that updates;
 	private void update(){
+		
 		if(Constants.PAUSE == true){
 			return;
 		}
+		
 		manager.update();
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			if(manager.gameObjects.get(i).getObjectId() == ObjectId.Player){
@@ -157,6 +161,7 @@ public class Game extends Canvas implements Runnable{
 	    if(Constants.PAUSE == true){
 				 graphics.setColor(new Color(0f,0f,0f,.5f));
 				 graphics.fillRect(0, 0, getWidth() + Constants.GAME_WORLD_OFFSET , getHeight());
+				 pause.render(graphics);
 			 }
 	    
 		dispose();
