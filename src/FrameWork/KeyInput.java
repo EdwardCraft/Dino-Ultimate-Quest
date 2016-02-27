@@ -27,8 +27,15 @@ public class KeyInput extends KeyAdapter{
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			gameObject = manager.gameObjects.get(i);
 			if(gameObject.getObjectId() == ObjectId.Player){
-				if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
-				if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
+				if(Constants.PAUSE == false){
+					if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
+					if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
+					if(key == KeyEvent.VK_SPACE && !gameObject.isJumping()){					
+						gameObject.setJumping(true);
+						gameObject.setVelocityY(-Constants.PLAYER_JUMP_HIGHT);
+					}
+				}
+				
 				if(key == KeyEvent.VK_ENTER){
 					if(Constants.PAUSE == false){
 						Constants.PAUSE = true;
@@ -38,11 +45,6 @@ public class KeyInput extends KeyAdapter{
 					
 				}
 
-				if(key == KeyEvent.VK_SPACE && !gameObject.isJumping()){
-					
-					gameObject.setJumping(true);
-					gameObject.setVelocityY(-Constants.PLAYER_JUMP_HIGHT);
-			}
 		}
 	}
 		

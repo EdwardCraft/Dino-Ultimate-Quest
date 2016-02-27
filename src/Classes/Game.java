@@ -159,7 +159,7 @@ public class Game extends Canvas implements Runnable{
 		graphics2D.translate( -playerCamera.getPositionX(),  -playerCamera.getPositionY());
 		
 	    if(Constants.PAUSE == true){
-				 graphics.setColor(new Color(0f,0f,0f,.5f));
+				 graphics.setColor(new Color(0f,0f,0f,.7f));
 				 graphics.fillRect(0, 0, getWidth() + Constants.GAME_WORLD_OFFSET , getHeight());
 				 pause.render(graphics);
 			 }
