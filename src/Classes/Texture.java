@@ -9,6 +9,8 @@ import Utils.Constants;
 public class Texture{
 
 	SpriteSheet blockSprite,playerSpriteIdle,palyerMovingSprite,levelSprite, MenuSprite;
+	SpriteSheet dinoFirePreparation;
+	SpriteSheet fireBallBreath;
 	BufferedImageLoader imageloader;
 	
 	private BufferedImage blockSheet   = null;
@@ -17,7 +19,8 @@ public class Texture{
 	private BufferedImage levelSheet = null;
 	private BufferedImage MenuSheet = null; 
 	public  BufferedImage Level1Game = null;
-	
+	private BufferedImage dinofirePrepationSheet = null;
+	private BufferedImage fireBall = null;
 	public BufferedImage[] block   =  new BufferedImage[3];
 	public BufferedImage[] player  =  new BufferedImage[17];
 	public BufferedImage[] runnigS =  new BufferedImage[22];
@@ -26,17 +29,18 @@ public class Texture{
 	public BufferedImage[] SkyBackground = new BufferedImage[3];
 	public BufferedImage[] Menu = new BufferedImage[3];
 	public BufferedImage[] menuBackground = new BufferedImage[1];
-	
+	public BufferedImage[] fireBreath = new BufferedImage[7];
+	public BufferedImage[] fire = new BufferedImage[4];
 	public Texture(){
 
 		imageloader = new BufferedImageLoader();
 		
 		try{
-			
+			fireBall = imageloader.loadImage(Constants.FIRE_BALL);
 			blockSheet  = imageloader.loadImage(Constants.BLOCK_1);
 			playerIdleSheet = imageloader.loadImage(Constants.PLAYER_IDLE_SPRITES);
 			palyerRunnigSheet = imageloader.loadImage(Constants.PLAYER_RUNNING_SPRITES);
-
+			dinofirePrepationSheet = imageloader.loadImage(Constants.PLAYER_FIRE_PREPARATION);
 			SkyBackground[0] = imageloader.loadImage(Constants.GAME_LEVEL_1_SKY);
 			SkyBackground[1] = imageloader.loadImage(Constants.GAME_LEVEL_1_TREES);
 			MenuSheet = imageloader.loadImage(Constants.GAME_MENU_SCREEN);
@@ -48,6 +52,8 @@ public class Texture{
 			e.printStackTrace();
 		}
 		
+		fireBallBreath = new SpriteSheet(fireBall);
+		dinoFirePreparation = new SpriteSheet(dinofirePrepationSheet);
 		levelSprite = new SpriteSheet(levelSheet);
 		blockSprite = new SpriteSheet(blockSheet);
 		playerSpriteIdle = new SpriteSheet(playerIdleSheet);
@@ -60,21 +66,24 @@ public class Texture{
 	
 	private void getTextures(){	
 		
+		for(int i = 0; i < 7; i++){
+			fireBreath[i] = dinoFirePreparation.grabImage(i+1, 1, 106, 100);
+		}
+		
 		Menu[0] =  MenuSprite.grabImage(1, 1, 1, 1);
 			
 		block[0]   = blockSprite.grabImage(1,2,32,32);//dirt block
 		block[1]   = blockSprite.grabImage(2,2,32,32);// grass
 
+		for(int i = 0; i < 8 ; i++){
+			player[i]  = playerSpriteIdle.grabImage(i + 1, 1, 100, 100);// idle frame for player
+		}
 
-		player[0]  = playerSpriteIdle.grabImage(1,1,100,100);// idle frame for player
-		player[1]  = playerSpriteIdle.grabImage(2,1,100,100);// idle frame for player
-		player[2]  = playerSpriteIdle.grabImage(3,1,100,100);// idle frame for player
-		player[3]  = playerSpriteIdle.grabImage(4,1,100,100);// idle frame for player
-		player[4]  = playerSpriteIdle.grabImage(5,1,100,100);// idle frame for player
-		player[5]  = playerSpriteIdle.grabImage(6,1,100,100);// idle frame for player
-		player[6]  = playerSpriteIdle.grabImage(7,1,100,100);// idle frame for player
-		player[7]  = playerSpriteIdle.grabImage(8,1,100,100);// idle frame for player
-
+		for(int i = 0; i < 3 ; i++){
+			fire[i] = fireBallBreath.grabImage(i + 1, 1, 106, 100);
+		}
+		
+		
 		player[8]  = playerSpriteIdle.grabImage(1,2,100,100);// jump
 		player[9]  = playerSpriteIdle.grabImage(2,2,100,100);// fall
 
@@ -101,7 +110,7 @@ public class Texture{
 		runnigS[18] = palyerMovingSprite.grabImage(5,3,106,100);//runnihg
 		runnigS[19] = palyerMovingSprite.grabImage(6,3,106,100);//runnihg
 		runnigS[20] = palyerMovingSprite.grabImage(7,3,106,100);//runnihg
-
+		
 
 
 

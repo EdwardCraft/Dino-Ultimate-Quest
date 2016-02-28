@@ -20,7 +20,8 @@ public class Constants {
 	public static final float PLAYER_MAX_SPEED = 10;
 	public static final String PLAYER_IDLE_SPRITES = "/Player/SriteSheetTirunt.png";
 	public static final String PLAYER_RUNNING_SPRITES  = "/Player/Running.png";
-	
+	public static final String PLAYER_FIRE_PREPARATION = "/Player/fire-breath.png";
+	public static final String FIRE_BALL = "/Player/fire-blast.png";
 
 	// Thread 
 	public static final double AMOUNT_OF_TICKS = 60.0f;

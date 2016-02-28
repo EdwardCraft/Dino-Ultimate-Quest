@@ -28,17 +28,19 @@ public class Player extends GameObject{
 
 
 
-	Graphics2D g2d;
-	Manager manager;
-	GameObject gameObject;
+	private Graphics2D g2d;
+	private Manager manager;
+	private GameObject gameObject;
 	private PlayerCam camera;
-	Texture texture;
+	private Texture texture;
+
 	
 	private Animation playerIdle;
 	private Animation palyerjump;
 	private Animation palyerFall;
 	private Animation playerRun;
-
+	private Animation playerCrunch;
+	private Animation palyerFire;
 	
 	public Player(float x, float y, Manager manager,PlayerCam camera,ObjectId id){
 		super(x, y, id);
@@ -46,16 +48,21 @@ public class Player extends GameObject{
 		this.camera = camera;
 		texture = Game.getTexture();
 		
+		palyerjump   = new Animation(3, texture.player[8]);
+		palyerFall   = new Animation(10, texture.player[9]);
+		palyerFire   = new Animation(1,texture.fireBreath[6]);
+		
+		playerCrunch = new Animation(1, texture.fireBreath[0],
+				texture.fireBreath[1],texture.fireBreath[2],
+				texture.fireBreath[3],texture.fireBreath[4],
+				texture.fireBreath[5],texture.fireBreath[6]);
+		
 		playerIdle   = new Animation(3, texture.player[0], texture.player[1], 
 				texture.player[2], texture.player[3], 
 				texture.player[4], texture.player[5],
 				texture.player[6], texture.player[7]
 				);
-		
-		palyerjump   = new Animation(3, texture.player[8]);
-		
-		palyerFall   = new Animation(10, texture.player[9]);
-		
+				
 		playerRun   = new Animation(1,
 				texture.runnigS[0],texture.runnigS[1],
 				texture.runnigS[2],texture.runnigS[3],texture.runnigS[4],
@@ -67,23 +74,28 @@ public class Player extends GameObject{
 				texture.runnigS[20]
 				);
 
+		
 		facing = Facing.LEFT;
 		jumpState = JumpState.FALLING;
-		
-	
+		crunch = false;
+		fire = false;
 	}
 
 
 
 	public void update(LinkedList<GameObject> object){
-		x +=velocity_X;
-		y +=velocity_Y;
+		
+		if(crunch == false && fire == false){
+			x +=velocity_X;
+		}
 	
+		y +=velocity_Y;
+		
 		if(x <= 0 ){
 			x = 0;
 		}	
 		
-		if(falling || jumping){
+		if((falling || jumping)){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
 		}
 		
@@ -98,36 +110,62 @@ public class Player extends GameObject{
 		palyerjump.runAnimation();
 		palyerFall.runAnimation();
 		playerRun.runAnimation();
+		playerCrunch.runAnimation();
+		palyerFire.runAnimation();
 		
+		System.out.println(crunch);
 	}
 
 	public void render(Graphics g){
 
 		g.setColor(Color.blue);
-		
-		if(jumping){
-			if(facing == Facing.RIGHT)
-				palyerFall.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
-						(int)y, - Constants.PLAYER_RECTANGLE_WIDTH,Constants.PLAYER_RECTANGLE_HEIGHT);
-			else
-				palyerFall.drawAnimation(g,(int)x,(int)y,Constants.PLAYER_RECTANGLE_WIDTH,Constants.PLAYER_RECTANGLE_HEIGHT);
-		}else{
-			if(velocity_X !=0){
-			if(facing == Facing.RIGHT)
-				playerRun.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
-						(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
-			else 
-				playerRun.drawAnimation(g,(int)x,(int)y, Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
-		}else{
-			if(facing == Facing.RIGHT)
-				playerIdle.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
-						(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
-			else
-				playerIdle.drawAnimation(g,(int)x,(int)y, Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
-		}
-
-		}		
-
+			if(jumping){
+				 if(fire == true){
+					if(facing == Facing.RIGHT){
+						palyerFire.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH, 
+								(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}else{
+						palyerFire.drawAnimation(g, (int)x, (int)y,Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}
+				}else{
+					if(facing == Facing.RIGHT)
+						palyerFall.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
+									(int)y, - Constants.PLAYER_RECTANGLE_WIDTH,Constants.PLAYER_RECTANGLE_HEIGHT);
+					else if(facing == facing.LEFT)
+						palyerFall.drawAnimation(g,(int)x,(int)y,Constants.PLAYER_RECTANGLE_WIDTH,Constants.PLAYER_RECTANGLE_HEIGHT);
+					}
+			}else{
+				if(crunch == false && fire == false){
+					if(velocity_X !=0){
+						if(facing == Facing.RIGHT)
+							playerRun.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
+									(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+						else 
+							playerRun.drawAnimation(g,(int)x,(int)y, Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}else{
+						if(facing == Facing.RIGHT)
+							playerIdle.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
+									(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+						else
+							playerIdle.drawAnimation(g,(int)x,(int)y, Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}
+				}else if (crunch == true){
+					if(facing == Facing.RIGHT){
+						playerCrunch.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH, 
+								(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}else{
+						playerCrunch.drawAnimation(g, (int)x, (int)y,Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}
+				}else if(fire == true){
+					if(facing == Facing.RIGHT){
+						palyerFire.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH, 
+								(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}else{
+						palyerFire.drawAnimation(g, (int)x, (int)y,Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					}
+				}
+			}	
+	
 	}
 
 	private void Collision(LinkedList<GameObject> object){
@@ -210,12 +248,8 @@ public class Player extends GameObject{
 	}
 
 
-
-
-	public void select() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void select() {	}
+	
+	
 
 } 

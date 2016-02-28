@@ -2,6 +2,8 @@ package FrameWork;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.management.monitor.GaugeMonitor;
+
 import Classes.Game;
 import Entities.Manager;
 import Entities.Pause;
@@ -30,7 +32,9 @@ public class KeyInput extends KeyAdapter{
 				if(Constants.PAUSE == false){
 					if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
 					if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
-					if(key == KeyEvent.VK_SPACE && !gameObject.isJumping()){					
+					if(key == KeyEvent.VK_SPACE) gameObject.setCruch(true);
+					if(key == KeyEvent.VK_Z) gameObject.setFire(true);
+					if(key == KeyEvent.VK_UP && !gameObject.isJumping()){					
 						gameObject.setJumping(true);
 						gameObject.setVelocityY(-Constants.PLAYER_JUMP_HIGHT);
 					}
@@ -81,7 +85,8 @@ public class KeyInput extends KeyAdapter{
 			if(gameObject.getObjectId() == ObjectId.Player){
 				if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(0);
 				if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(0);
-				if(key == KeyEvent.VK_W) gameObject.setVelocityY(0);
+				if(key == KeyEvent.VK_SPACE) gameObject.setCruch(false);
+				if(key == KeyEvent.VK_Z) gameObject.setFire(false);
 				
 			}
 		}

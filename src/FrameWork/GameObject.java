@@ -17,7 +17,9 @@ public abstract class GameObject {
 	protected boolean falling;
 	protected boolean jumping;
 	protected int currentChoice;
-
+	protected Boolean fire;
+	protected Boolean crunch;
+	
 	protected final String[] options = {
 			"Start",
 			"Help",
@@ -71,7 +73,23 @@ public abstract class GameObject {
 	}
 	
 	public void setCurrentChoise(int currentChoice){this.currentChoice = currentChoice;}
-
+	
+	public boolean isFIre(){
+		return fire;
+	}
+	
+	public void setFire(Boolean fire){
+		this.fire = fire;
+		
+	}
+	
+	public boolean ifCrucnh(){
+		return crunch;
+	}
+	
+	public void setCruch(Boolean crunch){
+		this.crunch = crunch;
+	}
 	
 
 }
