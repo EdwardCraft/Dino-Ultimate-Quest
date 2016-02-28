@@ -113,12 +113,11 @@ public class Player extends GameObject{
 		playerCrunch.runAnimation();
 		palyerFire.runAnimation();
 		
-		System.out.println(crunch);
 	}
 
 	public void render(Graphics g){
 
-		g.setColor(Color.blue);
+		
 			if(jumping){
 				 if(fire == true){
 					if(facing == Facing.RIGHT){

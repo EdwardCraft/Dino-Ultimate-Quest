@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import javax.management.monitor.GaugeMonitor;
 
 import Classes.Game;
+import Entities.Blast;
 import Entities.Manager;
 import Entities.Pause;
 import FrameWork.GameObject;
@@ -33,7 +34,14 @@ public class KeyInput extends KeyAdapter{
 					if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
 					if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
 					if(key == KeyEvent.VK_SPACE) gameObject.setCruch(true);
-					if(key == KeyEvent.VK_Z) gameObject.setFire(true);
+					if(key == KeyEvent.VK_Z){		
+						manager.addObject(new Blast(gameObject.getX(), 
+								gameObject.getY(),
+								ObjectId.Blast, 
+								gameObject.getFacing()));
+						gameObject.setFire(true);
+					}
+					
 					if(key == KeyEvent.VK_UP && !gameObject.isJumping()){					
 						gameObject.setJumping(true);
 						gameObject.setVelocityY(-Constants.PLAYER_JUMP_HIGHT);

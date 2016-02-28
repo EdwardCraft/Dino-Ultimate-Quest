@@ -4,7 +4,7 @@ public enum ObjectId {
 
 	Player(),
 	Block(),
-	Bullet(),
+	Blast(),
 	Flag(),
 	Reset(),
 	Enemy(),

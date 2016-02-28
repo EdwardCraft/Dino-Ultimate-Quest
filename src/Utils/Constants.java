@@ -22,7 +22,8 @@ public class Constants {
 	public static final String PLAYER_RUNNING_SPRITES  = "/Player/Running.png";
 	public static final String PLAYER_FIRE_PREPARATION = "/Player/fire-breath.png";
 	public static final String FIRE_BALL = "/Player/fire-blast.png";
-
+	public static final int FIRE_BALL_VELOCITY = 15;
+	
 	// Thread 
 	public static final double AMOUNT_OF_TICKS = 60.0f;
 	public static final double NANO_SECONDS = 1000000000 / AMOUNT_OF_TICKS;
