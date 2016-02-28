@@ -14,12 +14,12 @@ public class PlayerCam {
 
 
 	public void update(GameObject player){
-		float smothCameraX = -player.getX() + Constants.GAME_WINDOW_WIDTH / 3;
+		float smothCameraX = -player.getX() + Constants.GAME_WINDOW_WIDTH / 6;
 		float smothCameraY = (float) (-player.getY() + (float)Constants.GAME_WINDOW_HEIGHT/ 1.25);
-		position_X += (smothCameraX - position_X) * (0.5);
+		position_X += (smothCameraX - position_X) * (0.1);
 		//position_Y += (smothCameraY - position_Y) * (0.5);
 	}
-
+	
 
 	public float getPositionX(){ return position_X; }
 	public void setPositionX(float position_X){ this.position_X = position_X; }

@@ -91,8 +91,17 @@ public class Manager{
 		for(int i = 0; i < gameObjects.size(); i ++ ){
 			tempObject = gameObjects.get(i);
 			tempObject.update(gameObjects);
+			if(tempObject.getObjectId() == ObjectId.Blast){
+				if(tempObject.getX() < 0){
+					removeObject(tempObject);					
+				}
+				if(tempObject.getX() > (Constants.GAME_WINDOW_WIDTH * 10)){
+					removeObject(tempObject);
+				}
+				
+			}
 		}
-
+		
 	}
 	
 	

@@ -113,14 +113,13 @@ public class Game extends Canvas implements Runnable{
 		if(Constants.PAUSE == true){
 			return;
 		}
-		
 		manager.update();
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			if(manager.gameObjects.get(i).getObjectId() == ObjectId.Player){
 				playerCamera.update(manager.gameObjects.get(i));
 			}
 		}	
-		
+
 
 	}
 

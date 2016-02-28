@@ -17,11 +17,10 @@ public class Blast extends GameObject{
 	
 	private Texture texture;
 	private Animation blast;
-	private float x,y;
+
 	public Blast(float x, float y, ObjectId id, Facing facing) {
 		super(x, y, id);
-		this.x = x;
-		this.y = y;
+
 		this.facing = facing;
 		texture = Game.getTexture();
 		
