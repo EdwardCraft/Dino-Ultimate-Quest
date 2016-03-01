@@ -8,10 +8,11 @@ import Utils.Constants;
 
 public class Texture{
 
-	SpriteSheet blockSprite,playerSpriteIdle,palyerMovingSprite,levelSprite, MenuSprite;
-	SpriteSheet dinoFirePreparation;
-	SpriteSheet fireBallBreath;
-	BufferedImageLoader imageloader;
+	private SpriteSheet blockSprite,playerSpriteIdle,palyerMovingSprite,levelSprite, MenuSprite;
+	private SpriteSheet dinoFirePreparation;
+	private SpriteSheet fireBallBreath;
+	private SpriteSheet EnemyOneSheet;
+	private BufferedImageLoader imageloader;
 	
 	private BufferedImage blockSheet   = null;
 	private BufferedImage playerIdleSheet  = null;
@@ -21,6 +22,8 @@ public class Texture{
 	public  BufferedImage Level1Game = null;
 	private BufferedImage dinofirePrepationSheet = null;
 	private BufferedImage fireBall = null;
+	private BufferedImage enemyOneImage = null;
+	
 	public BufferedImage[] block   =  new BufferedImage[3];
 	public BufferedImage[] player  =  new BufferedImage[17];
 	public BufferedImage[] runnigS =  new BufferedImage[22];
@@ -31,11 +34,14 @@ public class Texture{
 	public BufferedImage[] menuBackground = new BufferedImage[1];
 	public BufferedImage[] fireBreath = new BufferedImage[7];
 	public BufferedImage[] fire = new BufferedImage[4];
+	public BufferedImage[] enemy = new BufferedImage[10];
+	
 	public Texture(){
 
 		imageloader = new BufferedImageLoader();
 		
 		try{
+			enemyOneImage = imageloader.loadImage(Constants.ENEMY_SPRITE_SHEET);
 			fireBall = imageloader.loadImage(Constants.FIRE_BALL);
 			blockSheet  = imageloader.loadImage(Constants.BLOCK_1);
 			playerIdleSheet = imageloader.loadImage(Constants.PLAYER_IDLE_SPRITES);
@@ -52,6 +58,7 @@ public class Texture{
 			e.printStackTrace();
 		}
 		
+		EnemyOneSheet = new SpriteSheet(enemyOneImage);
 		fireBallBreath = new SpriteSheet(fireBall);
 		dinoFirePreparation = new SpriteSheet(dinofirePrepationSheet);
 		levelSprite = new SpriteSheet(levelSheet);
@@ -68,6 +75,10 @@ public class Texture{
 		
 		for(int i = 0; i < 7; i++){
 			fireBreath[i] = dinoFirePreparation.grabImage(i+1, 1, 106, 100);
+		}
+		
+		for(int i = 0; i < enemy.length; i++){
+			enemy[i] = EnemyOneSheet.grabImage(i+1, 1, 100, 100);
 		}
 		
 		Menu[0] =  MenuSprite.grabImage(1, 1, 1, 1);

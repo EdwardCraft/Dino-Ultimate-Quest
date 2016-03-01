@@ -22,7 +22,12 @@ public class Constants {
 	public static final String PLAYER_RUNNING_SPRITES  = "/Player/Running.png";
 	public static final String PLAYER_FIRE_PREPARATION = "/Player/fire-breath.png";
 	public static final String FIRE_BALL = "/Player/fire-blast.png";
-	public static final int FIRE_BALL_VELOCITY = 15;
+	public static final int FIRE_BALL_VELOCITY = 13;
+	
+	//enemy
+	public static final String ENEMY_SPRITE_SHEET= "/Monsters/enemy-1-anination.png";
+	public static final int ENEMY_RECTANGLE_WIDTH = 100;
+	public static final int ENEMY_RECTANGLE_HEIGHT = 100;
 	
 	// Thread 
 	public static final double AMOUNT_OF_TICKS = 60.0f;

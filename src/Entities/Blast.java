@@ -17,7 +17,8 @@ public class Blast extends GameObject{
 	
 	private Texture texture;
 	private Animation blast;
-
+	private int blastBoost;
+	
 	public Blast(float x, float y, ObjectId id, Facing facing) {
 		super(x, y, id);
 
@@ -26,7 +27,7 @@ public class Blast extends GameObject{
 		
 		blast = new Animation(1, texture.fire[0],
 				texture.fire[1], texture.fire[2]);
-		
+		blastBoost = 10;
 	}
 
 	@Override
@@ -64,6 +65,10 @@ public class Blast extends GameObject{
 	public void select() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setblastBoost(int blastBoost ){
+		this.blastBoost = blastBoost;
 	}
 
 }
