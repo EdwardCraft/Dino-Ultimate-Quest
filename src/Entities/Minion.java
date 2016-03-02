@@ -21,7 +21,7 @@ public class Minion extends GameObject {
 	private Animation monster;
 	private Manager manager;
 	private GameObject gameObject;
-	private Facing facingMonster;
+
 	private static final int left = 5;
 	private float width   = 70, height = 70;
 	private float gravity = 0.5f;
@@ -35,45 +35,37 @@ public class Minion extends GameObject {
 		this.manager = manager;
 		
 		texture = Game.getTexture();
-		monster = new Animation(3, 
+		monster = new Animation(Constants.ENEMY_ANIMATION_DURATION, 
 				texture.enemy[0], texture.enemy[1],
 				texture.enemy[2], texture.enemy[3],
 				texture.enemy[4], texture.enemy[5],
 				texture.enemy[6], texture.enemy[7],
 				texture.enemy[8], texture.enemy[9]);
 		
-		facingMonster = Facing.LEFT;
+		facing = Facing.RIGHT;
 
 
 	}
 
 
 	public void update(LinkedList<GameObject> object) {
-		x -= left;
-		x += velocity_X;
+		
 		y += velocity_Y;
-
-		if(falling || jumping)
-		{
-			velocity_Y += gravity;
-			if(velocity_Y > MAX_SPEED)
-				velocity_Y = MAX_SPEED;			
-		}
-
-		/*if(facingMonster == Facing.RIGHT){
+		
+		if(facing == Facing.RIGHT){
 			x -= Constants.ENEMY_MOVEMENT_SPEED;
-			System.out.println("right" + x);
+			
 		}
-	    if(facingMonster == Facing.LEFT){
+	    if(facing == Facing.LEFT){
 			x += Constants.ENEMY_MOVEMENT_SPEED;
-			System.out.println("left " + x);
+		
 		}
-		*/
+		
 			
 
-		/*if((falling || jumping)){
+		if((falling || jumping)){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
-		}*/
+		}
 		
 		
 		monster.runAnimation();
@@ -110,13 +102,12 @@ public class Minion extends GameObject {
 				if(getBounds().intersects(tempObject.getBounds()))
 				{
 
-					y = tempObject.getY()-height;
+					y = tempObject.getY() - Constants.ENEMY_RECTANGLE_HEIGHT;
 					velocity_Y = 0;
 					falling = false;
 					jumping = false;
-					//velocity_Y -= 5;
 					System.out.println("boton");
-				}else falling =true;
+				}else falling = true;
 
 				if(getBoundsTop().intersects(tempObject.getBounds()))
 				{
@@ -128,16 +119,14 @@ public class Minion extends GameObject {
 				if(getBoundsLeft().intersects(tempObject.getBounds()))
 				{
 					x = tempObject.getX() + 35;
-					velocity_X+=10;
-					facingMonster = Facing.RIGHT;
+					facing = Facing.RIGHT;
 					System.out.println("left");
 				}
 
 				if(getBoundsRight().intersects(tempObject.getBounds()))
 				{
-					x =tempObject.getX() - width;
-					velocity_X-=10;
-					facingMonster = Facing.LEFT;
+					x =tempObject.getX() - Constants.ENEMY_RECTANGLE_WIDTH;
+					facing = Facing.LEFT;
 					System.out.println("right");
 				}
 
@@ -149,62 +138,61 @@ public class Minion extends GameObject {
 
 	public void render(Graphics g) {
 		
-		/*Graphics2D g2d = (Graphics2D) g; 
+		Graphics2D g2d = (Graphics2D) g; 
 		g.setColor(Color.red);
 		g2d.draw(getBounds());
 		g2d.draw(getBoundsRight());
 		g2d.draw(getBoundsLeft());
-		g2d.draw(getBoundsTop());*/
+		g2d.draw(getBoundsTop());
 		
-		if(facingMonster == Facing.RIGHT){
+		if(facing == Facing.RIGHT){
 			monster.drawAnimation(g, (int)x, 
 					(int)y , Constants.ENEMY_RECTANGLE_WIDTH, Constants.ENEMY_RECTANGLE_HEIGHT );
 		}else{
 			monster.drawAnimation(g, (int)x + Constants.ENEMY_RECTANGLE_WIDTH , 
 					(int)y , - Constants.ENEMY_RECTANGLE_WIDTH , Constants.ENEMY_RECTANGLE_HEIGHT );
 		}
-		
-		/*g.setColor(new Color(105,224,130));
-		//g.fillRect((int)x,(int)y,32,32);
-
-		g.fillRect((int)x,(int)y,(int)70,(int)70);
-
-		Graphics2D g2d = (Graphics2D) g;
-
-		g.setColor(Color.red);
-		g2d.draw(getBounds());
-		g2d.draw(getBoundsRight());
-		g2d.draw(getBoundsLeft());
-		g2d.draw(getBoundsTop());*/
-		
-		
+				
 	}
 	
 	
 	
 	public Rectangle getBounds(){
-		return  new Rectangle((int)((int)x+(Constants.ENEMY_RECTANGLE_WIDTH/2)-((Constants.ENEMY_RECTANGLE_WIDTH/2)/2)),
+		
+		return  new Rectangle(
+				(int)((int)x+(Constants.ENEMY_RECTANGLE_WIDTH / 4)),
 				(int)((int)y+(Constants.ENEMY_RECTANGLE_HEIGHT/2)),
-				(int)Constants.ENEMY_RECTANGLE_WIDTH/2,(int)Constants.ENEMY_RECTANGLE_HEIGHT/2);
+				(int)Constants.ENEMY_RECTANGLE_WIDTH/2,
+				(int)Constants.ENEMY_RECTANGLE_HEIGHT/2);
 	}
 	
 
 	public Rectangle getBoundsTop(){
 
-		return new Rectangle((int)((int)x+(Constants.ENEMY_RECTANGLE_WIDTH/2)-((Constants.ENEMY_RECTANGLE_WIDTH/2)/2)),
-				(int)y,(int)Constants.ENEMY_RECTANGLE_WIDTH/2,(int)Constants.ENEMY_RECTANGLE_HEIGHT/2);
+		return new Rectangle(
+				(int)((int)x+(Constants.ENEMY_RECTANGLE_WIDTH / 4)),
+				(int)y,
+				(int)Constants.ENEMY_RECTANGLE_WIDTH/2,
+				(int)Constants.ENEMY_RECTANGLE_HEIGHT/2);
 	}
 	public Rectangle getBoundsRight(){
 
-		return new Rectangle((int)((int)x+Constants.ENEMY_RECTANGLE_WIDTH-5),(int)y+5,
-				(int)5,(int)Constants.ENEMY_RECTANGLE_HEIGHT-10);
+		return new Rectangle(
+				(int)((int)x+Constants.ENEMY_RECTANGLE_WIDTH - 6),
+				(int)y + 10,
+				(int)5,
+				(int)Constants.ENEMY_RECTANGLE_HEIGHT - 20);
 	}
 	public Rectangle getBoundsLeft(){
 
-		return new Rectangle((int)x,(int)y+5,
-				(int)5,(int)Constants.ENEMY_RECTANGLE_HEIGHT-10);
+		return new Rectangle(
+				(int)x,
+				(int)y + 10,
+				(int)5,
+				(int)Constants.ENEMY_RECTANGLE_HEIGHT - 20);
 	}
-	@Override
+	
+	
 	public void select() {
 		
 		

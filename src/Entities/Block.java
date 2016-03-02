@@ -28,11 +28,15 @@ public class Block extends GameObject {
 	
 	public void render(Graphics g){
 		
-		if(blockType == 0){
+		Graphics2D g2d = (Graphics2D) g; 
+		g.setColor(Color.yellow);
+		g2d.draw(getBounds());
+		
+		/*if(blockType == 0){
 			g.drawImage(texture.block[0],(int)x,(int)y,null);
 		}else if(blockType == 1){
 			g.drawImage(texture.block[1],(int)x,(int)y,null);
-		}
+		}*/
 		
 	}
 

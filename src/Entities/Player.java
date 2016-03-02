@@ -116,9 +116,15 @@ public class Player extends GameObject{
 	}
 
 	public void render(Graphics g){
-
+			
+		Graphics2D g2d = (Graphics2D) g; 
+		g.setColor(Color.red);
+		g2d.draw(getBounds());
+		g2d.draw(getBoundsRight());
+		g2d.draw(getBoundsLeft());
+		g2d.draw(getBoundsTop());
 		
-			if(jumping){
+			/*if(jumping){
 				 if(fire == true){
 					if(facing == Facing.RIGHT){
 						palyerFire.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH, 
@@ -163,7 +169,7 @@ public class Player extends GameObject{
 						palyerFire.drawAnimation(g, (int)x, (int)y,Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
 					}
 				}
-			}	
+			}	*/
 	
 	}
 

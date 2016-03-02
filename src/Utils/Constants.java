@@ -25,6 +25,7 @@ public class Constants {
 	public static final int FIRE_BALL_VELOCITY = 13;
 	
 	//enemy
+	public static final int ENEMY_ANIMATION_DURATION = 4;
 	public static final String ENEMY_SPRITE_SHEET= "/Monsters/enemy-1-anination.png";
 	public static final int ENEMY_RECTANGLE_WIDTH = 70;
 	public static final int ENEMY_RECTANGLE_HEIGHT = 70;
