@@ -17,7 +17,8 @@ public class PlayerCam {
 		float smothCameraX = -player.getX() + Constants.GAME_WINDOW_WIDTH / 6;
 		float smothCameraY = (float) (-player.getY() + (float)Constants.GAME_WINDOW_HEIGHT/ 1.25);
 		position_X += (smothCameraX - position_X) * (0.1);
-		//position_Y += (smothCameraY - position_Y) * (0.5);
+		position_Y += (smothCameraY - position_Y) * (0.1);
+	
 	}
 	
 

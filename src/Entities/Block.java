@@ -7,6 +7,7 @@ import Classes.Game;
 import Classes.Texture;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Color;
 
@@ -26,11 +27,13 @@ public class Block extends GameObject {
 	}
 	
 	public void render(Graphics g){
+		
 		if(blockType == 0){
 			g.drawImage(texture.block[0],(int)x,(int)y,null);
 		}else if(blockType == 1){
 			g.drawImage(texture.block[1],(int)x,(int)y,null);
 		}
+		
 	}
 
 	public Rectangle getBounds(){

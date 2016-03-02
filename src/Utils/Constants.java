@@ -26,8 +26,9 @@ public class Constants {
 	
 	//enemy
 	public static final String ENEMY_SPRITE_SHEET= "/Monsters/enemy-1-anination.png";
-	public static final int ENEMY_RECTANGLE_WIDTH = 100;
-	public static final int ENEMY_RECTANGLE_HEIGHT = 100;
+	public static final int ENEMY_RECTANGLE_WIDTH = 70;
+	public static final int ENEMY_RECTANGLE_HEIGHT = 70;
+	public static final int ENEMY_MOVEMENT_SPEED = - 5;
 	
 	// Thread 
 	public static final double AMOUNT_OF_TICKS = 60.0f;

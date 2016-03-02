@@ -36,7 +36,8 @@ public class Game extends Canvas implements Runnable{
 	BufferedImageLoader imageLoader;
 	static Texture texture;
 	private Pause pause;
-
+	private int hudActive;
+	
 	public Game(){
 
 		running = false;
@@ -54,6 +55,7 @@ public class Game extends Canvas implements Runnable{
 		manager = new Manager(playerCamera);
 		this.addKeyListener(new KeyInput(manager));
 		hud = new Hud();
+		hudActive = 0;
 	}
 
 
@@ -137,25 +139,30 @@ public class Game extends Canvas implements Runnable{
 	    graphics2D = (Graphics2D) graphics;
 
 
-	    graphics.setColor(new Color(90,194,250));
+	    graphics.setColor(new Color(0,0,0));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
 	    
 	    if(manager.getCurrentState() != Constants.MENU_STATE){
 	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
 	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
-	    			hud.render(graphics);
+	    	hudActive = 1;
+	    	
 	    }
 	
 	
 	    if(playerCamera.getPositionX() < 0){
-		    graphics2D.translate( playerCamera.getPositionX(),  playerCamera.getPositionY());
+		    graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
 		}
 		   
 		    manager.render(graphics);
+	
+		graphics2D.translate( -playerCamera.getPositionX(), -playerCamera.getPositionY());
 		
-
-		graphics2D.translate( -playerCamera.getPositionX(),  -playerCamera.getPositionY());
+	    
+		if(hudActive != 0){
+			hud.render(graphics);
+		}
 		
 	    if(Constants.PAUSE == true){
 				 graphics.setColor(new Color(0f,0f,0f,.7f));
@@ -166,11 +173,6 @@ public class Game extends Canvas implements Runnable{
 		dispose();
 		bufferStrategy.show();
 		
-
-		
-	  
-	    
-
 
 	}
 

@@ -14,8 +14,8 @@ public abstract class GameObject {
 	protected ObjectId id;
 	protected JumpState jumpState;
 	protected Facing facing;
-	protected boolean falling;
-	protected boolean jumping;
+	protected boolean falling = true;
+	protected boolean jumping = false;
 	protected int currentChoice;
 	protected Boolean fire;
 	protected Boolean crunch;
@@ -30,8 +30,7 @@ public abstract class GameObject {
 		this.x  = x;
 		this.y  = y;
 		this.id = id;
-		falling = true;
-		jumping = false;
+	
 		currentChoice = 0;
 	}
 
