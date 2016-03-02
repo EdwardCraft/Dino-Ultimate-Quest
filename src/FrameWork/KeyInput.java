@@ -11,6 +11,7 @@ import Entities.Pause;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
 import Utils.Constants;
+import Utils.Enums.Facing;
 import Utils.Enums.JumpState;
 
 public class KeyInput extends KeyAdapter{
@@ -31,8 +32,14 @@ public class KeyInput extends KeyAdapter{
 			gameObject = manager.gameObjects.get(i);
 			if(gameObject.getObjectId() == ObjectId.Player){
 				if(Constants.PAUSE == false){
-					if(key == KeyEvent.VK_RIGHT) gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
-					if(key == KeyEvent.VK_LEFT) gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
+					if(key == KeyEvent.VK_RIGHT){
+						gameObject.setFacing(Facing.LEFT);
+						gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
+					}
+					if(key == KeyEvent.VK_LEFT){
+						gameObject.setFacing(Facing.RIGHT);
+						gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
+					}
 					if(key == KeyEvent.VK_SPACE) gameObject.setCruch(true);
 					if(key == KeyEvent.VK_Z){		
 						manager.addObject(new Blast(gameObject.getX(), 

@@ -23,6 +23,9 @@ public class Constants {
 	public static final String PLAYER_FIRE_PREPARATION = "/Player/fire-breath.png";
 	public static final String FIRE_BALL = "/Player/fire-blast.png";
 	public static final int FIRE_BALL_VELOCITY = 13;
+	// PLAYER_KNOCKBACK[0] is for the Y coordinate
+	//PLAYER_KNOCKBACK[1] is for the X coordinate
+	public static final int[] PLAYER_KNOCKBACK = { 7, 7};
 	
 	//enemy
 	public static final int ENEMY_ANIMATION_DURATION = 4;

@@ -60,15 +60,33 @@ public class Blast extends GameObject{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void setblastBoost(int blastBoost ){
+		this.blastBoost = blastBoost;
+	}
 
+	@Override
+	public Rectangle getBoundsTop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rectangle getBoundsRight() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rectangle getBoundsLeft() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public void select() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public void setblastBoost(int blastBoost ){
-		this.blastBoost = blastBoost;
 	}
 
 }

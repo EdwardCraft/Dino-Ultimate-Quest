@@ -143,9 +143,9 @@ public class Game extends Canvas implements Runnable{
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
 	    
 	    if(manager.getCurrentState() != Constants.MENU_STATE){
-	    	/*graphics.drawImage(texture.SkyBackground[0], 0, 0, 
+	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
-	    			Constants.GAME_WINDOW_HEIGHT + 10, null);*/
+	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
 	    	hudActive = 1;
 	    	
 	    }

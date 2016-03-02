@@ -1,6 +1,8 @@
 package Entities;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
+import Utils.Enums.RectangleBounds;
+
 import java.util.LinkedList;
 
 import Classes.Game;
@@ -28,23 +30,41 @@ public class Block extends GameObject {
 	
 	public void render(Graphics g){
 		
-		Graphics2D g2d = (Graphics2D) g; 
+		/*Graphics2D g2d = (Graphics2D) g; 
 		g.setColor(Color.yellow);
-		g2d.draw(getBounds());
+		g2d.draw(getBounds());*/
 		
-		/*if(blockType == 0){
+		if(blockType == 0){
 			g.drawImage(texture.block[0],(int)x,(int)y,null);
 		}else if(blockType == 1){
 			g.drawImage(texture.block[1],(int)x,(int)y,null);
-		}*/
+		}
 		
 	}
 
 	public Rectangle getBounds(){
-		return new Rectangle((int)x, (int)y, 32, 32);
+	
+			return new Rectangle((int)x, (int)y, 32, 32);
 	}
 
+	@Override
+	public Rectangle getBoundsTop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public Rectangle getBoundsRight() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rectangle getBoundsLeft() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public void select() {
 		// TODO Auto-generated method stub
 		

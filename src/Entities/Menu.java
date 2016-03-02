@@ -77,6 +77,27 @@ public class Menu extends GameObject{
 		return null;
 	}
 
+
+	@Override
+	public Rectangle getBoundsTop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Rectangle getBoundsRight() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Rectangle getBoundsLeft() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 

@@ -13,4 +13,11 @@ public class Enums {
 		LEFT
 	}
 	
+	public enum RectangleBounds{
+		Top,
+		Botton,
+		Left,
+		Right
+	}
+	
 }

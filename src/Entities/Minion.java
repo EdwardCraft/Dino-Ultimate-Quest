@@ -14,21 +14,14 @@ import FrameWork.ObjectId;
 import Utils.Constants;
 import Utils.Enums.Facing;
 import Utils.Enums.JumpState;
+import Utils.Enums.RectangleBounds;
 
 public class Minion extends GameObject {
 	
 	private Texture texture;
 	private Animation monster;
 	private Manager manager;
-	private GameObject gameObject;
 
-	private static final int left = 5;
-	private float width   = 70, height = 70;
-	private float gravity = 0.5f;
-	private final float MAX_SPEED = 10;
-
-	private static final int c=5;
-	
 
 	public Minion(float x, float y, Manager manager, ObjectId id) {
 		super(x, y, id);
@@ -69,81 +62,20 @@ public class Minion extends GameObject {
 		
 		
 		monster.runAnimation();
-		Collision(object);
-	}
-	
-	private void Collision(LinkedList<GameObject> object){
-		for(int i = 0; i <manager.gameObjects.size(); i++)
-		{
-			GameObject tempObject = manager.gameObjects.get(i);
-			/*if(tempObject.getObjectId() == ObjectId.Player)
-			{
-				if(getBoundsLeft().intersects(tempObject.getBounds()))
-				{
-					manager.mapReset();
-				}
-				if(getBoundsRight().intersects(tempObject.getBounds()))
-				{
-					manager.mapReset();
-				}
-				if(getBoundsTop().intersects(tempObject.getBounds()))
-				{
-					manager.mapReset();
-					
-				}
-				if(getBounds().intersects(tempObject.getBounds()))
-				{
-					manager.mapReset();
-				}				
-			}*/
-			 if(tempObject.getObjectId() == ObjectId.Block)
-			{
-
-				if(getBounds().intersects(tempObject.getBounds()))
-				{
-
-					y = tempObject.getY() - Constants.ENEMY_RECTANGLE_HEIGHT;
-					velocity_Y = 0;
-					falling = false;
-					jumping = false;
-					System.out.println("boton");
-				}else falling = true;
-
-				if(getBoundsTop().intersects(tempObject.getBounds()))
-				{
-					y = tempObject.getY()+32;
-					velocity_Y =0;
-				
-				}
-
-				if(getBoundsLeft().intersects(tempObject.getBounds()))
-				{
-					x = tempObject.getX() + 35;
-					facing = Facing.RIGHT;
-					System.out.println("left");
-				}
-
-				if(getBoundsRight().intersects(tempObject.getBounds()))
-				{
-					x =tempObject.getX() - Constants.ENEMY_RECTANGLE_WIDTH;
-					facing = Facing.LEFT;
-					System.out.println("right");
-				}
-
-			}
-		}
-
+		collisionGround();
 		
 	}
+	
+
 
 	public void render(Graphics g) {
 		
-		Graphics2D g2d = (Graphics2D) g; 
+		/*Graphics2D g2d = (Graphics2D) g; 
 		g.setColor(Color.red);
 		g2d.draw(getBounds());
 		g2d.draw(getBoundsRight());
 		g2d.draw(getBoundsLeft());
-		g2d.draw(getBoundsTop());
+		g2d.draw(getBoundsTop());*/
 		
 		if(facing == Facing.RIGHT){
 			monster.drawAnimation(g, (int)x, 
@@ -155,9 +87,46 @@ public class Minion extends GameObject {
 				
 	}
 	
+	private void collisionGround(){
+		for(int i = 0; i <manager.gameObjects.size(); i++)
+		{
+			GameObject tempObject = manager.gameObjects.get(i);
+			 if(tempObject.getObjectId() == ObjectId.Block)
+			{
+
+				if(getBounds().intersects(tempObject.getBounds())){
+					y = tempObject.getY() - Constants.ENEMY_RECTANGLE_HEIGHT;
+					velocity_Y = 0;
+					falling = false;
+					jumping = false;
+
+				}else falling = true;
+
+				if(getBoundsTop().intersects(tempObject.getBounds())){
+					y = tempObject.getY()+32;
+					velocity_Y =0;
+				}
+
+				if(getBoundsLeft().intersects(tempObject.getBounds())){
+					x = tempObject.getX() + 35;
+					facing = Facing.RIGHT;
 	
+				}
+
+				if(getBoundsRight().intersects(tempObject.getBounds()))	{
+					x =tempObject.getX() - Constants.ENEMY_RECTANGLE_WIDTH;
+					facing = Facing.LEFT;
+
+				}
+			}			 
+		}	
+	}
 	
+
 	public Rectangle getBounds(){
+		
+
+		
 		
 		return  new Rectangle(
 				(int)((int)x+(Constants.ENEMY_RECTANGLE_WIDTH / 4)),

@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import Utils.Enums.Facing;
 import Utils.Enums.JumpState;
+import Utils.Enums.RectangleBounds;
 
 
 public abstract class GameObject {
@@ -38,6 +39,9 @@ public abstract class GameObject {
 	public abstract void update(LinkedList<GameObject> object);
 	public abstract void render(Graphics g);
 	public abstract Rectangle getBounds();
+	public abstract Rectangle getBoundsTop();
+	public abstract Rectangle getBoundsRight();
+	public abstract Rectangle getBoundsLeft();
 	public abstract void select();
 
 	public float getX(){ return x; }
@@ -90,6 +94,8 @@ public abstract class GameObject {
 		this.crunch = crunch;
 	}
 	
-	
+	public RectangleBounds getBounds(RectangleBounds bounds){
+		return bounds;
+	}
 
 }
