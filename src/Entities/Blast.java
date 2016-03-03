@@ -5,11 +5,11 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import Classes.Game;
-import Classes.Texture;
 import FrameWork.Animation;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
 import Utils.Constants;
+import Utils.Texture;
 import Utils.Enums.Facing;
 
 

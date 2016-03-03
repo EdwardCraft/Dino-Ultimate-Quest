@@ -1,12 +1,12 @@
 package Entities;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
+import Utils.Texture;
 import Utils.Enums.RectangleBounds;
 
 import java.util.LinkedList;
 
 import Classes.Game;
-import Classes.Texture;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

@@ -1,6 +1,6 @@
 package Main;
 import Classes.Game;
-import Utils.Window;
+import FrameWork.Window;
 import Utils.Constants;
 
 public class POAGAME {

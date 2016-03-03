@@ -3,6 +3,8 @@ import java.awt.Canvas;
 
 import Utils.BufferedImageLoader;
 import Utils.Constants;
+import Utils.Texture;
+
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
@@ -12,12 +14,13 @@ import Audio.GameAudio;
 import java.awt.Graphics;
 import java.awt.Color;
 import Entities.Manager;
-import Entities.Pause;
 import FrameWork.ObjectId;
+import FrameWork.PlayerCam;
+import Screens.Hud;
+import Screens.Pause;
 import Entities.Player;
-import FrameWork.Hud;
 import FrameWork.KeyInput;
-import Utils.PlayerCam;
+
 import java.awt.Graphics2D;
 
 
@@ -54,7 +57,7 @@ public class Game extends Canvas implements Runnable{
 		playerCamera = new PlayerCam(0,0);
 		manager = new Manager(playerCamera);
 		this.addKeyListener(new KeyInput(manager));
-		hud = new Hud();
+		hud = new Hud(manager);
 		hudActive = 0;
 	}
 

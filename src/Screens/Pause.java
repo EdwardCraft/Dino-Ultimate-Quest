@@ -1,4 +1,4 @@
-package Entities;
+package Screens;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;

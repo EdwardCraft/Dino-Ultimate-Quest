@@ -1,5 +1,5 @@
-package Utils;
-import FrameWork.GameObject;
+package FrameWork;
+import Utils.Constants;
 
 
 public class PlayerCam {

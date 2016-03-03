@@ -2,21 +2,24 @@ package Entities;
 import FrameWork.Animation;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
+import FrameWork.PlayerCam;
+
 import java.util.LinkedList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import Classes.Game;
-import Classes.Texture;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.time.temporal.JulianFields;
 
 import Utils.Constants;
+import Utils.Texture;
+
 import java.awt.Color;
 
 import Utils.Enums.Facing;
 import Utils.Enums.JumpState;
-import Utils.PlayerCam;
 
 import java.awt.Graphics2D;
 import FrameWork.GameObject;
@@ -81,6 +84,7 @@ public class Player extends GameObject{
 		fire = false;
 		hit = false;
 		velocityHitX = 0;
+		health = Constants.PLAYER_HEALTH;
 	}
 
 
@@ -228,6 +232,7 @@ public class Player extends GameObject{
 						if(hit == false){
 							 jumping = true;
 							 hit = true;
+							 health -= Constants.ENEMY_DAMAGE_POWER;
 							 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
 							 velocityHitX = -Constants.PLAYER_KNOCKBACK[1];
 						}	
@@ -238,6 +243,7 @@ public class Player extends GameObject{
 						 if(hit == false){
 							 jumping = true;
 							 hit = true;
+							 health -= Constants.ENEMY_DAMAGE_POWER;
 							 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
 							 velocityHitX = Constants.PLAYER_KNOCKBACK[1];
 						 }		

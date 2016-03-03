@@ -1,10 +1,7 @@
-package Classes;
+package Utils;
 
 import java.awt.image.BufferedImage;
 import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
-
-import Utils.BufferedImageLoader;
-import Utils.Constants;
 
 public class Texture{
 

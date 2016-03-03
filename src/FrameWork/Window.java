@@ -1,4 +1,4 @@
-package Utils;
+package FrameWork;
 import Classes.Game;
 import java.awt.Dimension;
 import javax.swing.JFrame;

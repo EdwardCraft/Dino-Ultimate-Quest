@@ -20,6 +20,7 @@ public abstract class GameObject {
 	protected int currentChoice;
 	protected Boolean fire;
 	protected Boolean crunch;
+	protected int health;
 	
 	protected final String[] options = {
 			"Start",
@@ -57,45 +58,21 @@ public abstract class GameObject {
 	public Facing getFacing(){ return facing; }
 	public void setFacing(Facing facing){ this.facing = facing; }
 	public ObjectId getObjectId(){ return id; }
-	
-
-	public boolean isFalling() {
-		return falling;
-	}
-
-	public void setFalling(boolean falling) {
-		this.falling = falling;
-	}
-
-	public boolean isJumping() {
-		return jumping;
-	}
-
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
-	}
-	
+	public boolean isFalling() { return falling; }
+	public void setFalling(boolean falling) { this.falling = falling; }
+	public boolean isJumping() { return jumping; }
+	public void setJumping(boolean jumping) { this.jumping = jumping;}
 	public void setCurrentChoise(int currentChoice){this.currentChoice = currentChoice;}
+	public boolean isFIre(){ return fire; }
+	public void setFire(Boolean fire){ this.fire = fire;}
+	public boolean isCrucnh(){ return crunch; }
+	public void setCruch(Boolean crunch){ this.crunch = crunch;}
+	public RectangleBounds getBounds(RectangleBounds bounds){return bounds;}
+	public int getHealth(){ return health;}
+	public void setHelath(int health){ this.health = health;}
 	
-	public boolean isFIre(){
-		return fire;
-	}
 	
-	public void setFire(Boolean fire){
-		this.fire = fire;
-		
-	}
 	
-	public boolean isCrucnh(){
-		return crunch;
-	}
 	
-	public void setCruch(Boolean crunch){
-		this.crunch = crunch;
-	}
-	
-	public RectangleBounds getBounds(RectangleBounds bounds){
-		return bounds;
-	}
 
 }

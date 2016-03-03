@@ -1,4 +1,4 @@
-package Entities;
+package Screens;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,10 +7,11 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import Classes.Game;
-import Classes.Texture;
+import Entities.Manager;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
 import Utils.Constants;
+import Utils.Texture;
 
 
 public class Menu extends GameObject{
@@ -43,6 +44,7 @@ public class Menu extends GameObject{
 
 
 	public void render(Graphics g) {
+		
 		g.drawImage(texture.menuBackground[0], 0, 0, Constants.GAME_WINDOW_WIDTH + 10, Constants.GAME_WINDOW_HEIGHT + 10, null);
 		
 		g.setFont(font);
