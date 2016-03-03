@@ -21,8 +21,9 @@ public class Minion extends GameObject {
 	private Texture texture;
 	private Animation monster;
 	private Manager manager;
-
-
+	private Boolean hit;
+	private int velocityHitX;
+	
 	public Minion(float x, float y, Manager manager, ObjectId id) {
 		super(x, y, id);
 		this.manager = manager;
@@ -36,7 +37,8 @@ public class Minion extends GameObject {
 				texture.enemy[8], texture.enemy[9]);
 		
 		facing = Facing.RIGHT;
-
+		hit = false;
+		velocityHitX = 0;
 
 	}
 
@@ -45,25 +47,30 @@ public class Minion extends GameObject {
 		
 		y += velocity_Y;
 		
-		if(facing == Facing.RIGHT){
+		if(facing == Facing.RIGHT && hit == false){
 			x -= Constants.ENEMY_MOVEMENT_SPEED;
-			
+			velocityHitX = 0;
 		}
-	    if(facing == Facing.LEFT){
+	    if(facing == Facing.LEFT && hit == false){
 			x += Constants.ENEMY_MOVEMENT_SPEED;
-		
+			velocityHitX = 0;
 		}
 		
+	    if(hit == true){
+	    	x += velocityHitX;
+	    }
 			
 
 		if((falling || jumping)){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
+		}else{
+			velocity_Y = 0;
 		}
 		
 		
 		monster.runAnimation();
 		collisionGround();
-		
+		collisionPlayer();
 	}
 	
 
@@ -99,6 +106,7 @@ public class Minion extends GameObject {
 					velocity_Y = 0;
 					falling = false;
 					jumping = false;
+					hit = false;
 
 				}else falling = true;
 
@@ -123,6 +131,31 @@ public class Minion extends GameObject {
 	}
 	
 
+	private void collisionPlayer(){
+		for(int i = 0; i < manager.gameObjects.size(); i++ ){
+			GameObject gameObject = manager.gameObjects.get(i);
+			if(gameObject.getObjectId() == ObjectId.Player){
+				if(gameObject.isCrucnh() == true){
+					if(getBoundsLeft().intersects(gameObject.getBoundsRight())){
+						jumping = true;
+						hit = true;
+						velocity_Y = -Constants.ENEMY_KNOCKBACK[0];
+						velocityHitX = Constants.ENEMY_KNOCKBACK[1];
+					}
+					if(getBoundsRight().intersects(gameObject.getBoundsLeft())){
+						jumping = true;
+						hit = true;
+						velocity_Y = -Constants.ENEMY_KNOCKBACK[0];
+						velocityHitX = -Constants.ENEMY_KNOCKBACK[1];
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
+	
 	public Rectangle getBounds(){
 		
 

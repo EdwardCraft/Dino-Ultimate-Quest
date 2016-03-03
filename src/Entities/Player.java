@@ -222,7 +222,7 @@ public class Player extends GameObject{
 			GameObject gameObject = manager.gameObjects.get(i);
 			 if(gameObject.getObjectId() == ObjectId.Enemy)
 			{
-					//code for Right
+				if(crunch == false){
 					if(getBoundsRight().intersects(gameObject.getBoundsLeft()))
 					{
 						if(hit == false){
@@ -232,7 +232,7 @@ public class Player extends GameObject{
 							 velocityHitX = -Constants.PLAYER_KNOCKBACK[1];
 						}	
 					}
-					//code for left
+				
 					if(getBoundsLeft().intersects(gameObject.getBoundsRight()))
 					{	
 						 if(hit == false){
@@ -242,7 +242,7 @@ public class Player extends GameObject{
 							 velocityHitX = Constants.PLAYER_KNOCKBACK[1];
 						 }		
 					}
-
+				}
 			}			 
 		}	
 	}

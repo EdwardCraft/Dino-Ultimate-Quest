@@ -33,6 +33,10 @@ public class Constants {
 	public static final int ENEMY_RECTANGLE_WIDTH = 70;
 	public static final int ENEMY_RECTANGLE_HEIGHT = 70;
 	public static final int ENEMY_MOVEMENT_SPEED = - 5;
+	// ENEMY_KNOCKBACK[0] is for the Y coordinate
+	// ENEMY_KNOCKBACK[1] is for the X coordinate
+	public static final int[] ENEMY_KNOCKBACK = {7, 7};
+	
 	
 	// Thread 
 	public static final double AMOUNT_OF_TICKS = 60.0f;

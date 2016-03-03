@@ -86,7 +86,7 @@ public abstract class GameObject {
 		
 	}
 	
-	public boolean ifCrucnh(){
+	public boolean isCrucnh(){
 		return crunch;
 	}
 	
