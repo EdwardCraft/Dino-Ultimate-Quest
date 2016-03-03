@@ -3,29 +3,33 @@ package Screens;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.LinkedList;
-
 import Classes.Game;
 import Entities.Manager;
-import FrameWork.GameObject;
-import FrameWork.ObjectId;
 import Utils.Constants;
+import Utils.Enums.ScreenState;
 import Utils.Texture;
 
 
-public class Menu extends GameObject{
+public class Menu {
 	
-	Texture texture;
-	Manager manager;
-
+	private Texture texture;
+	private Manager manager;
 	private Font font; 
-		
+	private int currentChoice;
+	private ScreenState state;
 	
-	public Menu(float x, float y,Manager manager, ObjectId id) {
-		super(x, y, id);
+	protected final String[] options = {
+			"Start",
+			"Help",
+			"Quit"
+		};
+	
+	
+	public Menu(Manager manager) {
+		
 		this.manager = manager;
 		texture = Game.getTexture();
+		currentChoice = 0;
 		
 		try{
 			font = new Font("Arial", Font.PLAIN, 30);
@@ -37,8 +41,8 @@ public class Menu extends GameObject{
 	}
 
 
-	public void update(LinkedList<GameObject> object) {
-
+	public void update() {
+		
 		
 	}
 
@@ -63,7 +67,7 @@ public class Menu extends GameObject{
 	
 	public void select(){
 		if(currentChoice == 0){
-			manager.setState(Constants.LEVELS);
+			state = ScreenState.Game;
 		}else if(currentChoice == 1){
 			
 		}else if(currentChoice == 2){
@@ -71,33 +75,23 @@ public class Menu extends GameObject{
 		}
 		
 	}
-		
+	
+	public int getCurrentChoise(){
+		return currentChoice;
+	}
+	
+	public void  setCurrentChoise(int currentChoice){
+		this.currentChoice = currentChoice;
+	}
+	
+	public String[] getOptions(){
+		return options;
+	}
 	
 
-	public Rectangle getBounds() {
-
-		return null;
-	}
-
-
-	@Override
-	public Rectangle getBoundsTop() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Rectangle getBoundsRight() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Rectangle getBoundsLeft() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ScreenState getScreenState(){
+		return state;
 	}
 
 	

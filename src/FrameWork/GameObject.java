@@ -17,23 +17,17 @@ public abstract class GameObject {
 	protected Facing facing;
 	protected boolean falling = true;
 	protected boolean jumping = false;
-	protected int currentChoice;
 	protected Boolean fire;
 	protected Boolean crunch;
 	protected int health;
 	
-	protected final String[] options = {
-			"Start",
-			"Help",
-			"Quit"
-		};
-	
+
 	public GameObject(float x, float y, ObjectId id){
 		this.x  = x;
 		this.y  = y;
 		this.id = id;
 	
-		currentChoice = 0;
+	
 	}
 
 	// for collision detection
@@ -62,7 +56,6 @@ public abstract class GameObject {
 	public void setFalling(boolean falling) { this.falling = falling; }
 	public boolean isJumping() { return jumping; }
 	public void setJumping(boolean jumping) { this.jumping = jumping;}
-	public void setCurrentChoise(int currentChoice){this.currentChoice = currentChoice;}
 	public boolean isFIre(){ return fire; }
 	public void setFire(Boolean fire){ this.fire = fire;}
 	public boolean isCrucnh(){ return crunch; }

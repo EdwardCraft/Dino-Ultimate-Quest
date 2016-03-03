@@ -20,4 +20,10 @@ public class Enums {
 		Right
 	}
 	
+	public enum ScreenState{
+		Menu,
+		Pause,
+		Game
+	}
+	
 }

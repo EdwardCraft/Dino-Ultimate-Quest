@@ -3,20 +3,18 @@ import java.awt.Canvas;
 
 import Utils.BufferedImageLoader;
 import Utils.Constants;
+import Utils.Enums.ScreenState;
 import Utils.Texture;
-
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
-
 import Audio.GameAudio;
-
 import java.awt.Graphics;
 import java.awt.Color;
 import Entities.Manager;
 import FrameWork.ObjectId;
 import FrameWork.PlayerCam;
 import Screens.Hud;
+import Screens.Menu;
 import Screens.Pause;
 import Entities.Player;
 import FrameWork.KeyInput;
@@ -24,29 +22,33 @@ import FrameWork.KeyInput;
 import java.awt.Graphics2D;
 
 
+
 public class Game extends Canvas implements Runnable{
 
 	private boolean running;
-	public static Thread thread;
+	private static Thread thread;
 
-	BufferStrategy bufferStrategy;
-	Graphics graphics;
-	Graphics2D graphics2D;
-	Manager manager;
-	PlayerCam playerCamera;
-	Hud hud;
-	GameAudio gameAudio;
-	BufferedImageLoader imageLoader;
+	private BufferStrategy bufferStrategy;
+	private Graphics graphics;
+	private Graphics2D graphics2D;
+	private Manager manager;
+	private PlayerCam playerCamera;
+	private Hud hud;
+	private GameAudio gameAudio;
+	private BufferedImageLoader imageLoader;
 	static Texture texture;
 	private Pause pause;
+	private Menu menu;
 	private int hudActive;
+	private ScreenState state;
 	
 	public Game(){
-
+		
 		running = false;
 		gameAudio = new GameAudio(Constants.GAME_LEVEL_1_AUDIO);
 		imageLoader = new BufferedImageLoader();
 		pause = new Pause();
+		state = ScreenState.Menu;
 		//gameAudio.play();
 	}
 
@@ -56,7 +58,8 @@ public class Game extends Canvas implements Runnable{
 		texture = new Texture();
 		playerCamera = new PlayerCam(0,0);
 		manager = new Manager(playerCamera);
-		this.addKeyListener(new KeyInput(manager));
+		menu = new Menu(manager);
+		this.addKeyListener(new KeyInput(manager, menu, this));
 		hud = new Hud(manager);
 		hudActive = 0;
 	}
@@ -118,12 +121,19 @@ public class Game extends Canvas implements Runnable{
 		if(Constants.PAUSE == true){
 			return;
 		}
-		manager.update();
-		for(int i = 0; i < manager.gameObjects.size(); i++){
-			if(manager.gameObjects.get(i).getObjectId() == ObjectId.Player){
-				playerCamera.update(manager.gameObjects.get(i));
-			}
-		}	
+		
+		if(state == ScreenState.Game){
+			manager.update();	
+			for(int i = 0; i < manager.gameObjects.size(); i++){
+				if(manager.gameObjects.get(i).getObjectId() == ObjectId.Player){
+					playerCamera.update(manager.gameObjects.get(i));
+				}
+			}	
+		}
+		
+		if(state == ScreenState.Menu){
+			menu.update();
+		}
 
 
 	}
@@ -145,32 +155,36 @@ public class Game extends Canvas implements Runnable{
 	    graphics.setColor(new Color(0,0,0));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
 	    
-	    if(manager.getCurrentState() != Constants.MENU_STATE){
+	   if(state == ScreenState.Game){
+		   
 	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
 	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
-	    	hudActive = 1;
 	    	
+	    	
+		    if(playerCamera.getPositionX() < 0){
+			    graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
+			}
+			   
+			    manager.render(graphics);
+		
+			graphics2D.translate( -playerCamera.getPositionX(), -playerCamera.getPositionY());			
+		    	
+				hud.render(graphics);
+			
+			   		
 	    }
-	
-	
-	    if(playerCamera.getPositionX() < 0){
-		    graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
-		}
-		   
-		    manager.render(graphics);
-	
-		graphics2D.translate( -playerCamera.getPositionX(), -playerCamera.getPositionY());
-		
-	    
-		if(hudActive != 0){
-			hud.render(graphics);
-		}
-		
+	   
+	   if(state == ScreenState.Menu){
+		   menu.render(graphics);
+	   }
+	   
+	   	
 	    if(Constants.PAUSE == true){
 				 graphics.setColor(new Color(0f,0f,0f,.7f));
 				 graphics.fillRect(0, 0, getWidth() + Constants.GAME_WORLD_OFFSET , getHeight());
 				 pause.render(graphics);
+				
 			 }
 	    
 		dispose();
@@ -190,5 +204,16 @@ public class Game extends Canvas implements Runnable{
 		return texture;
 	}
 
-
+	
+	public ScreenState getScreenState(){
+		return state;
+	}
+	
+	public void setScreenState(ScreenState state){
+		this.state = state;
+	}
+	
+	
+	
+	
 }

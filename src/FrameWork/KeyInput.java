@@ -2,90 +2,102 @@ package FrameWork;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.management.monitor.GaugeMonitor;
-
 import Classes.Game;
 import Entities.Blast;
 import Entities.Manager;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
-import Screens.Pause;
+import Screens.Menu;
 import Utils.Constants;
 import Utils.Enums.Facing;
-import Utils.Enums.JumpState;
+import Utils.Enums.ScreenState;
 
 public class KeyInput extends KeyAdapter{
 	
-	Manager manager;
-	GameObject gameObject;
-	JumpState jumpState;
-	public KeyInput(Manager manager){
+	private Manager manager;
+	private Menu menu;
+	private GameObject gameObject;
+	private Game game;
+	private int currentChoice;
+	
+	public KeyInput(Manager manager, Menu menu, Game game){
+		
 		this.manager = manager;
+		this.menu = menu;
+		this.game = game;
+		currentChoice = 0;
+		
 	}
 
 
 	@SuppressWarnings("deprecation")
 	public void keyPressed(KeyEvent e){
+		
 		int  key  = e.getKeyCode();
 		
-		for(int i = 0; i < manager.gameObjects.size(); i++){
-			gameObject = manager.gameObjects.get(i);
-			if(gameObject.getObjectId() == ObjectId.Player){
-				if(Constants.PAUSE == false){
-					if(key == KeyEvent.VK_RIGHT){
-						gameObject.setFacing(Facing.LEFT);
-						gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
-					}
-					if(key == KeyEvent.VK_LEFT){
-						gameObject.setFacing(Facing.RIGHT);
-						gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
-					}
-					if(key == KeyEvent.VK_SPACE) gameObject.setCruch(true);
-					if(key == KeyEvent.VK_Z){		
-						manager.addObject(new Blast(gameObject.getX(), 
-								gameObject.getY(),
-								ObjectId.Blast, 
-								gameObject.getFacing()));
-						gameObject.setFire(true);
-					}
-					
-					if(key == KeyEvent.VK_UP && !gameObject.isJumping()){					
-						gameObject.setJumping(true);
-						gameObject.setVelocityY(-Constants.PLAYER_JUMP_HIGHT);
-					}
-				}
-				
-				if(key == KeyEvent.VK_ENTER){
-					if(Constants.PAUSE == false){
-						Constants.PAUSE = true;
-					}else{
-						Constants.PAUSE = false;
-					}
-					
-				}
-
-		}
-	}
 		
-	   for(int i = 0; i < manager.gameObjects.size(); i++){
-		   gameObject = manager.gameObjects.get(i);
-			   if(gameObject.getObjectId() == ObjectId.Menu){
-				   if(key == KeyEvent.VK_ENTER) gameObject.select();
-				   if(key == KeyEvent.VK_UP) {
-					   gameObject.currentChoice --;
-					   if(gameObject.currentChoice == -1){
-						   gameObject.currentChoice = gameObject.options.length - 1;
-					   }
-				   }
-				   if(key == KeyEvent.VK_DOWN) {
-					   gameObject.currentChoice ++;
-					   if(gameObject.currentChoice == gameObject.options.length) {
-						   gameObject.currentChoice = 0;
+		if(game.getScreenState() == ScreenState.Game){
+			for(int i = 0; i < manager.gameObjects.size(); i++){
+				gameObject = manager.gameObjects.get(i);
+				if(gameObject.getObjectId() == ObjectId.Player){
+					if(Constants.PAUSE == false){
+						if(key == KeyEvent.VK_RIGHT){
+							gameObject.setFacing(Facing.LEFT);
+							gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
 						}
+						if(key == KeyEvent.VK_LEFT){
+							gameObject.setFacing(Facing.RIGHT);
+							gameObject.setVelocityX(-Constants.PLAYER_MOVEMENT_SPEDD);
+						}
+						if(key == KeyEvent.VK_SPACE) gameObject.setCruch(true);
+						if(key == KeyEvent.VK_Z){		
+							manager.addObject(new Blast(gameObject.getX(), 
+									gameObject.getY(),
+									ObjectId.Blast, 
+									gameObject.getFacing()));
+							gameObject.setFire(true);
+						}
+						
+						if(key == KeyEvent.VK_UP && !gameObject.isJumping()){					
+							gameObject.setJumping(true);
+							gameObject.setVelocityY(-Constants.PLAYER_JUMP_HIGHT);
+						}
+					}
+					
+					if(key == KeyEvent.VK_ENTER){
+						if(Constants.PAUSE == false){
+							Constants.PAUSE = true;
+						}else{
+							Constants.PAUSE = false;
+						}		
+					}
+			    }
+		    }
+		}
+
+		if(game.getScreenState() == ScreenState.Menu){
+			
+			   if(key == KeyEvent.VK_ENTER){
+				   game.setScreenState(ScreenState.Game);
+			   }
+			   if(key == KeyEvent.VK_UP) {
+				   menu.setCurrentChoise(currentChoice--);
+				   if(menu.getCurrentChoise() == -1){
+					   menu.setCurrentChoise(menu.getOptions().length - 1);
 				   }
 			   }
-		   
-	   }
+			   if(key == KeyEvent.VK_DOWN) {
+				   menu.setCurrentChoise(currentChoice ++);
+				   if(menu.getCurrentChoise() == menu.getOptions().length) {
+					   menu.setCurrentChoise(0);
+					}
+			   }	   
+		}
+	 
+	
+			 
+
+
 	   
 	   if(key == KeyEvent.VK_ESCAPE){
 		   System.exit(1);

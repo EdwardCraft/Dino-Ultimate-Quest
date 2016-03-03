@@ -16,14 +16,13 @@ import Utils.Texture;
 
 public class Manager{
 
-	public LinkedList<GameObject> gameObjects;
+	public  LinkedList<GameObject> gameObjects;
 	private GameObject tempObject;
 	private PlayerCam camera;
-	BufferedImageLoader imageLoader;
-	Texture texture;
-	private int currentState;
+	private BufferedImageLoader imageLoader;
+	private Texture texture;
 	private Player player;
-
+	private  int level;
 	
 	public Manager(PlayerCam camera){
 
@@ -31,24 +30,13 @@ public class Manager{
 		this.camera = camera;
 		gameObjects = new LinkedList<GameObject>();
 		imageLoader = new BufferedImageLoader();
-		currentState = Constants.MENU_STATE;
-		loadScreen(currentState);
+		level = 1;
+		switchLevel(level);
 		
 	}
 	
-	public void loadScreen(int state){
-		if(state == Constants.MENU_STATE){
-			clearLevel();
-			loadingImages(texture.Menu[0]);
-		}
-		else if(state == Constants.LEVELS_STATE){
 
-			switchLevel();
-		}
-	}
-	
-
-	public void switchLevel(){
+	public void switchLevel(int level){
 		clearLevel();
 		
 		camera.setPositionX(0);	
@@ -73,14 +61,7 @@ public class Manager{
 				
 	}
 	
-	
-	public void setState(int state){
-		clearLevel();
-		currentState = state;
-		loadScreen(state);
-	}
-	
-	
+
 	private void clearLevel(){
 		gameObjects.clear();
 	}
@@ -151,7 +132,6 @@ public class Manager{
 				int green = (pixel >> 8)  &  0xff;
 				int blue  = (pixel) & 0xff;
 				
-				if(red == 255 && green == 0 && blue == 0) addObject(new Menu(i * 32, j * 32,this, ObjectId.Menu));
 				if(red == 255 && green == 255 && blue == 0) addObject(new Flag(i * 32, j * 32,ObjectId.Flag));
 				if(red == 255 && green == 255 && blue == 255) addObject(new Block(i * 32, j * 32,0,ObjectId.Block));
 				if(red == 129 && green == 243 && blue == 158) addObject(new Block(i * 32, j * 32,1,ObjectId.Block));
@@ -163,9 +143,6 @@ public class Manager{
 
 	}
 
-	
-	public int getCurrentState(){
-		return currentState;
-	}
+
 
 }
