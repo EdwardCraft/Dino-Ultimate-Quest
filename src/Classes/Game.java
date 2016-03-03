@@ -58,7 +58,7 @@ public class Game extends Canvas implements Runnable{
 		texture = new Texture();
 		playerCamera = new PlayerCam(0,0);
 		manager = new Manager(playerCamera);
-		menu = new Menu(manager);
+		menu = new Menu(this);
 		this.addKeyListener(new KeyInput(manager, menu, this));
 		hud = new Hud(manager);
 		hudActive = 0;
@@ -118,7 +118,7 @@ public class Game extends Canvas implements Runnable{
 	//Everything  that updates;
 	private void update(){
 		
-		if(Constants.PAUSE == true){
+		if(state == ScreenState.Pause){
 			return;
 		}
 		
@@ -155,7 +155,7 @@ public class Game extends Canvas implements Runnable{
 	    graphics.setColor(new Color(0,0,0));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
 	    
-	   if(state == ScreenState.Game){
+	   if(state == ScreenState.Game || state == ScreenState.Pause){
 		   
 	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
 	    			Constants.GAME_WINDOW_WIDTH + 10, 
@@ -180,7 +180,7 @@ public class Game extends Canvas implements Runnable{
 	   }
 	   
 	   	
-	    if(Constants.PAUSE == true){
+	    if(state == ScreenState.Pause){
 				 graphics.setColor(new Color(0f,0f,0f,.7f));
 				 graphics.fillRect(0, 0, getWidth() + Constants.GAME_WORLD_OFFSET , getHeight());
 				 pause.render(graphics);

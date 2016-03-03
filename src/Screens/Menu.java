@@ -13,10 +13,10 @@ import Utils.Texture;
 public class Menu {
 	
 	private Texture texture;
-	private Manager manager;
 	private Font font; 
 	private int currentChoice;
 	private ScreenState state;
+	private Game game;
 	
 	protected final String[] options = {
 			"Start",
@@ -25,9 +25,8 @@ public class Menu {
 		};
 	
 	
-	public Menu(Manager manager) {
-		
-		this.manager = manager;
+	public Menu(Game game) {
+		this.game = game;
 		texture = Game.getTexture();
 		currentChoice = 0;
 		
@@ -62,12 +61,13 @@ public class Menu {
 			g.drawString(options[i], 500, 300 + i * 40);
 		}
 		
+		g.dispose();
 	}
 	
 	
 	public void select(){
 		if(currentChoice == 0){
-			state = ScreenState.Game;
+			game.setScreenState(ScreenState.Game);
 		}else if(currentChoice == 1){
 			
 		}else if(currentChoice == 2){
@@ -94,7 +94,7 @@ public class Menu {
 		return state;
 	}
 
-	
+
 
 
 	

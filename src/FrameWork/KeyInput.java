@@ -36,11 +36,11 @@ public class KeyInput extends KeyAdapter{
 		int  key  = e.getKeyCode();
 		
 		
-		if(game.getScreenState() == ScreenState.Game){
+		if(game.getScreenState() == ScreenState.Game || game.getScreenState() == ScreenState.Pause){
 			for(int i = 0; i < manager.gameObjects.size(); i++){
 				gameObject = manager.gameObjects.get(i);
 				if(gameObject.getObjectId() == ObjectId.Player){
-					if(Constants.PAUSE == false){
+					if(game.getScreenState() != ScreenState.Pause){
 						if(key == KeyEvent.VK_RIGHT){
 							gameObject.setFacing(Facing.LEFT);
 							gameObject.setVelocityX(Constants.PLAYER_MOVEMENT_SPEDD);
@@ -63,12 +63,11 @@ public class KeyInput extends KeyAdapter{
 							gameObject.setVelocityY(-Constants.PLAYER_JUMP_HIGHT);
 						}
 					}
-					
 					if(key == KeyEvent.VK_ENTER){
-						if(Constants.PAUSE == false){
-							Constants.PAUSE = true;
+						if(game.getScreenState() != ScreenState.Pause){
+							game.setScreenState(ScreenState.Pause);
 						}else{
-							Constants.PAUSE = false;
+							game.setScreenState(ScreenState.Game);
 						}		
 					}
 			    }
@@ -78,16 +77,16 @@ public class KeyInput extends KeyAdapter{
 		if(game.getScreenState() == ScreenState.Menu){
 			
 			   if(key == KeyEvent.VK_ENTER){
-				   game.setScreenState(ScreenState.Game);
+				   menu.select();
 			   }
 			   if(key == KeyEvent.VK_UP) {
-				   menu.setCurrentChoise(currentChoice--);
+				   menu.setCurrentChoise(menu.getCurrentChoise()-1);
 				   if(menu.getCurrentChoise() == -1){
 					   menu.setCurrentChoise(menu.getOptions().length - 1);
 				   }
 			   }
 			   if(key == KeyEvent.VK_DOWN) {
-				   menu.setCurrentChoise(currentChoice ++);
+				   menu.setCurrentChoise(menu.getCurrentChoise()+1);
 				   if(menu.getCurrentChoise() == menu.getOptions().length) {
 					   menu.setCurrentChoise(0);
 					}
@@ -95,13 +94,14 @@ public class KeyInput extends KeyAdapter{
 		}
 	 
 	
-			 
 
-
+	
 	   
 	   if(key == KeyEvent.VK_ESCAPE){
 		   System.exit(1);
 	   }
+	   
+	   
 	}
 
 	public void keyReleased(KeyEvent e){

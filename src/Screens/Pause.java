@@ -35,6 +35,7 @@ public class Pause {
 		g.drawImage(pauseImange, 
 				(Constants.GAME_WINDOW_WIDTH - 270) / 2, 
 				(Constants.GAME_WINDOW_HEIGHT - 300 ) / 2, null);
+		g.dispose();
 	}
 	
 	
