@@ -162,9 +162,9 @@ public class Game extends Canvas implements Runnable{
 	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
 	    	
 	    	
-		    if(playerCamera.getPositionX() < 0){
+		   // if(playerCamera.getPositionX() < 0){
 			    graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
-			}
+			//}
 			   
 			    manager.render(graphics);
 		

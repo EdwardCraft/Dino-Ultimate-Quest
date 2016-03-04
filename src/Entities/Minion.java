@@ -56,10 +56,13 @@ public class Minion extends GameObject {
 			velocityHitX = 0;
 		}
 		
-	    if(hit == true){
+	    if(facing == Facing.RIGHT && hit == true){
 	    	x += velocityHitX;
 	    }
-			
+	    
+	    if(facing == Facing.LEFT && hit == true){
+	    	x -= velocityHitX;
+	    }
 
 		if((falling || jumping)){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
@@ -71,6 +74,7 @@ public class Minion extends GameObject {
 		monster.runAnimation();
 		collisionGround();
 		collisionPlayer();
+		
 	}
 	
 
@@ -139,12 +143,14 @@ public class Minion extends GameObject {
 					if(getBoundsLeft().intersects(gameObject.getBoundsRight())){
 						jumping = true;
 						hit = true;
+						facing = Facing.RIGHT;
 						velocity_Y = -Constants.ENEMY_KNOCKBACK[0];
 						velocityHitX = Constants.ENEMY_KNOCKBACK[1];
 					}
 					if(getBoundsRight().intersects(gameObject.getBoundsLeft())){
 						jumping = true;
 						hit = true;
+						facing = Facing.LEFT;
 						velocity_Y = -Constants.ENEMY_KNOCKBACK[0];
 						velocityHitX = -Constants.ENEMY_KNOCKBACK[1];
 					}
@@ -156,11 +162,11 @@ public class Minion extends GameObject {
 	}
 	
 	
-	public Rectangle getBounds(){
-		
 
-		
-		
+	
+	
+	public Rectangle getBounds(){
+			
 		return  new Rectangle(
 				(int)((int)x+(Constants.ENEMY_RECTANGLE_WIDTH / 4)),
 				(int)((int)y+(Constants.ENEMY_RECTANGLE_HEIGHT/2)),

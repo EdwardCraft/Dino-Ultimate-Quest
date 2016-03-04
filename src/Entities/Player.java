@@ -6,6 +6,7 @@ import FrameWork.PlayerCam;
 
 import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
 
 import Classes.Game;
 
@@ -106,7 +107,7 @@ public class Player extends GameObject{
 	
 		if(x <= 0 ){
 			x = 0;
-		}	
+		}
 		
 		if((falling || jumping)){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
@@ -269,15 +270,22 @@ public class Player extends GameObject{
 				 portalB = gameObject;
 			}		
 		} 
-		
+
 		if(getBoundsRight().intersects(portalA.getBounds())){
-			System.out.println("collide");
-			x = portalB.getX() + Constants.GAME_PORTAL_OFFSET;
+			x = portalB.getX() +  Constants.GAME_PORTAL_WIDTH;
 		}
+		if(getBoundsLeft().intersects(portalA.getBounds())){
+			x = portalB.getX() + Constants.GAME_PORTAL_WIDTH;
+		}
+		
 		if(getBoundsLeft().intersects(portalB.getBounds())){
-			System.out.println("collide");
-			x = portalA.getX() - 100;
+			x = portalA.getX() - Constants.GAME_PORTAL_WIDTH * 2;
 		}
+	    if(getBoundsRight().intersects(portalB.getBounds())){
+			x = portalA.getX() - (Constants.PLAYER_RECTANGLE_WIDTH + Constants.GAME_PORTAL_WIDTH);
+			System.out.println("collide");
+		}
+
 	}
 	
 
