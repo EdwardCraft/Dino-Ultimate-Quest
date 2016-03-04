@@ -7,8 +7,10 @@ public class Constants {
 	public static final int GAME_WINDOW_HEIGHT = 600;
 	public static final String GAME_NAME = "POAGAME";
 	public static final int GAME_WORLD_OFFSET = 300;
-
-
+	public static final int GAME_PORTAL_WIDTH = 50;
+	public static final int GAME_PORTAL_HEIGHT = 50;
+	public static final int GAME_PORTAL_OFFSET = GAME_PORTAL_WIDTH ;
+	
 	//Player
 	public static final int PLAYER_RECTANGLE_WIDTH = 100;
 	public static final int PLAYER_RECTANGLE_HEIGHT = 100;
@@ -28,7 +30,7 @@ public class Constants {
 	public static final int[] PLAYER_KNOCKBACK = { 7, 7};
 	
 	//enemy
-	public static final int ENEMY_ANIMATION_DURATION = 4;
+	public static final int ENEMY_ANIMATION_DURATION = 3;
 	public static final String ENEMY_SPRITE_SHEET= "/Monsters/enemy-1-anination.png";
 	public static final int ENEMY_RECTANGLE_WIDTH = 70;
 	public static final int ENEMY_RECTANGLE_HEIGHT = 70;

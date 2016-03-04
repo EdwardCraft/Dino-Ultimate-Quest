@@ -132,7 +132,8 @@ public class Manager{
 				int green = (pixel >> 8)  &  0xff;
 				int blue  = (pixel) & 0xff;
 				
-				if(red == 255 && green == 255 && blue == 0) addObject(new Flag(i * 32, j * 32,ObjectId.Flag));
+				if(red == 255 && green == 255 && blue == 0) addObject(new Flag(i * 32, j * 32,ObjectId.FlagA));
+				if(red == 255 && green == 0 && blue == 0) addObject(new Flag(i * 32, j * 32,ObjectId.FlagB));
 				if(red == 255 && green == 255 && blue == 255) addObject(new Block(i * 32, j * 32,0,ObjectId.Block));
 				if(red == 129 && green == 243 && blue == 158) addObject(new Block(i * 32, j * 32,1,ObjectId.Block));
 				if(red == 0 && green == 0 && blue == 255) addObject(new Player(i * 32, j * 32,this,ObjectId.Player));

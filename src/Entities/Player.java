@@ -45,6 +45,8 @@ public class Player extends GameObject{
 	private Animation palyerFire;
 	private Boolean hit;
 	private int velocityHitX;
+	private GameObject portalA;
+	private GameObject portalB;
 	
 	public Player(float x, float y, Manager manager,ObjectId id){
 		super(x, y, id);
@@ -120,9 +122,9 @@ public class Player extends GameObject{
 		playerCrunch.runAnimation();
 		palyerFire.runAnimation();
 		
-		Collision();
+		collision();
 		collisionEnemy();
-		
+		collisionPortal();
 	}
 
 	public void render(Graphics g){
@@ -183,7 +185,7 @@ public class Player extends GameObject{
 	
 	}
 
-	private void Collision(){
+	private void collision(){
 
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			gameObject = manager.gameObjects.get(i);
@@ -254,6 +256,30 @@ public class Player extends GameObject{
 	}
 	
 
+	
+	public void collisionPortal(){
+		
+		
+		for(int i = 0; i < manager.gameObjects.size(); i++ ){
+			GameObject gameObject = manager.gameObjects.get(i);		
+			if(gameObject.getObjectId() == ObjectId.FlagA){
+				 portalA = gameObject;
+			}		
+			if(gameObject.getObjectId() == ObjectId.FlagB){
+				 portalB = gameObject;
+			}		
+		} 
+		
+		if(getBoundsRight().intersects(portalA.getBounds())){
+			System.out.println("collide");
+			x = portalB.getX() + Constants.GAME_PORTAL_OFFSET;
+		}
+		if(getBoundsLeft().intersects(portalB.getBounds())){
+			System.out.println("collide");
+			x = portalA.getX() - 100;
+		}
+	}
+	
 
 	public Rectangle getBounds(){
 
