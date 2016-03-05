@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 
 public class Animation {
 	
-	private int speed;
+	private float speed;
 	private int frames;
 	private int index =0;//what we are current at
 	private int count =0;//where we need to be 
 	private BufferedImage[] images;
 	private BufferedImage currentImg;
 
-	public Animation(int speed, BufferedImage... args){
+	public Animation(float speed, BufferedImage... args){
 		this.speed = speed;
 		images = new BufferedImage[args.length];
 

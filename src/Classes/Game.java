@@ -13,6 +13,7 @@ import java.awt.Color;
 import Entities.Manager;
 import FrameWork.ObjectId;
 import FrameWork.PlayerCam;
+import Screens.DeathScreen;
 import Screens.Hud;
 import Screens.Menu;
 import Screens.Pause;
@@ -35,18 +36,16 @@ public class Game extends Canvas implements Runnable{
 	private PlayerCam playerCamera;
 	private Hud hud;
 	private GameAudio gameAudio;
-	private BufferedImageLoader imageLoader;
 	static Texture texture;
 	private Pause pause;
 	private Menu menu;
-	private int hudActive;
 	private ScreenState state;
+	private DeathScreen deathScreen;
 	
 	public Game(){
 		
 		running = false;
 		gameAudio = new GameAudio(Constants.GAME_LEVEL_1_AUDIO);
-		imageLoader = new BufferedImageLoader();
 		pause = new Pause();
 		state = ScreenState.Menu;
 		//gameAudio.play();
@@ -57,11 +56,13 @@ public class Game extends Canvas implements Runnable{
 		
 		texture = new Texture();
 		playerCamera = new PlayerCam(0,0);
-		manager = new Manager(playerCamera);
+		manager = new Manager(playerCamera, this);
 		menu = new Menu(this);
-		this.addKeyListener(new KeyInput(manager, menu, this));
+		deathScreen = new DeathScreen(this);
+		this.addKeyListener(new KeyInput(manager, menu, deathScreen, this));
 		hud = new Hud(manager);
-		hudActive = 0;
+		
+		
 	}
 
 
@@ -134,7 +135,10 @@ public class Game extends Canvas implements Runnable{
 		if(state == ScreenState.Menu){
 			menu.update();
 		}
-
+		
+		if(state == ScreenState.Death){
+			deathScreen.update();
+		}
 
 	}
 
@@ -155,37 +159,34 @@ public class Game extends Canvas implements Runnable{
 	    graphics.setColor(new Color(0,0,0));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
 	    
-	   if(state == ScreenState.Game || state == ScreenState.Pause){
-		   
-	    	graphics.drawImage(texture.SkyBackground[0], 0, 0, 
-	    			Constants.GAME_WINDOW_WIDTH + 10, 
-	    			Constants.GAME_WINDOW_HEIGHT + 10, null);
+	    if(state == ScreenState.Game || state == ScreenState.Pause){
 	    	
-	    	
-		   // if(playerCamera.getPositionX() < 0){
-			    graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
-			//}
-			   
-			    manager.render(graphics);
-		
-			graphics2D.translate( -playerCamera.getPositionX(), -playerCamera.getPositionY());			
-		    	
-				hud.render(graphics);
+			graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
 			
-			   		
+			   
+		    	manager.render(graphics);
+	
+		    graphics2D.translate( -playerCamera.getPositionX(), -playerCamera.getPositionY());			
+	    	
+			hud.render(graphics);
+		
 	    }
-	   
+
+
 	   if(state == ScreenState.Menu){
 		   menu.render(graphics);
 	   }
 	   
-	   	
-	    if(state == ScreenState.Pause){
+	   if(state == ScreenState.Pause){
 				 graphics.setColor(new Color(0f,0f,0f,.7f));
 				 graphics.fillRect(0, 0, getWidth() + Constants.GAME_WORLD_OFFSET , getHeight());
 				 pause.render(graphics);
 				
 			 }
+	   
+	   if(state == ScreenState.Death){
+		   deathScreen.render(graphics);
+	   }
 	    
 		dispose();
 		bufferStrategy.show();

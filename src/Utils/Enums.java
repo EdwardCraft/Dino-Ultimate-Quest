@@ -23,7 +23,8 @@ public class Enums {
 	public enum ScreenState{
 		Menu,
 		Pause,
-		Game
+		Game,
+		Death
 	}
 	
 }

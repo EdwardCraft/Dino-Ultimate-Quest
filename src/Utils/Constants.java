@@ -17,7 +17,8 @@ public class Constants {
 	public static final int PLAYER_HEALTH = 262;
 	public static final int health = 262;
 	public static final float PLAYER_GRAVITY_ACCELERATION = 0.5f;
-	public static final float PLAYER_MOVEMENT_SPEDD = 10;
+	public static final float PLAYER_MOVEMENT_SPEDD = 13;
+	public static final float PLAYER_ANIMATION_RUNNING_SPEED = 0.97f;
 	public static final float PLAYER_JUMP_HIGHT = 10;
 	public static final float PLAYER_MAX_SPEED = 10;
 	public static final String PLAYER_IDLE_SPRITES = "/Player/SriteSheetTirunt.png";
@@ -35,7 +36,7 @@ public class Constants {
 	public static final int ENEMY_RECTANGLE_WIDTH = 70;
 	public static final int ENEMY_RECTANGLE_HEIGHT = 70;
 	public static final int ENEMY_MOVEMENT_SPEED = - 5;
-	public static final int ENEMY_DAMAGE_POWER = 10;
+	public static final int ENEMY_DAMAGE_POWER = 30;
 	// ENEMY_KNOCKBACK[0] is for the Y coordinate
 	// ENEMY_KNOCKBACK[1] is for the X coordinate
 	public static final int[] ENEMY_KNOCKBACK = {7, 7};

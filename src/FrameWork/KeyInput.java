@@ -7,6 +7,7 @@ import Entities.Blast;
 import Entities.Manager;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
+import Screens.DeathScreen;
 import Screens.Menu;
 import Utils.Constants;
 import Utils.Enums.Facing;
@@ -18,14 +19,14 @@ public class KeyInput extends KeyAdapter{
 	private Menu menu;
 	private GameObject gameObject;
 	private Game game;
-	private int currentChoice;
+	private DeathScreen deathScreen;
+	private GameObject player;
 	
-	public KeyInput(Manager manager, Menu menu, Game game){
-		
+	public KeyInput(Manager manager, Menu menu,DeathScreen deathScreen, Game game){
+		this.deathScreen = deathScreen;
 		this.manager = manager;
 		this.menu = menu;
 		this.game = game;
-		currentChoice = 0;
 		
 	}
 
@@ -93,7 +94,34 @@ public class KeyInput extends KeyAdapter{
 			   }	   
 		}
 	 
-	
+		if(game.getScreenState() == ScreenState.Death){
+			
+			   if(key == KeyEvent.VK_ENTER){
+				   for(int i = 0; i < manager.gameObjects.size(); i++){
+					   GameObject gameObject = manager.gameObjects.get(i);
+					   if(gameObject.getObjectId() == ObjectId.Player){
+						   player = gameObject;
+						   break;
+					   }
+				   }
+				   
+				   deathScreen.select(manager, player);
+				   
+			   }
+			   if(key == KeyEvent.VK_UP) {
+				   deathScreen.setCurrentChoise(deathScreen.getCurrentChoise()-1);
+				   if(deathScreen.getCurrentChoise() == -1){
+					   deathScreen.setCurrentChoise(deathScreen.getOptions().length - 1);
+				   }
+			   }
+			   if(key == KeyEvent.VK_DOWN) {
+				   deathScreen.setCurrentChoise(deathScreen.getCurrentChoise()+1);
+				   if(deathScreen.getCurrentChoise() == deathScreen.getOptions().length) {
+					   deathScreen.setCurrentChoise(0);
+					}
+			   }	   
+		}
+	 
 
 	
 	   

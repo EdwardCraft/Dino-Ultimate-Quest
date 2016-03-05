@@ -3,30 +3,31 @@ package Screens;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import Classes.Game;
 import Entities.Manager;
+import FrameWork.GameObject;
 import Utils.Constants;
-import Utils.Enums.ScreenState;
 import Utils.Texture;
+import Utils.Enums.ScreenState;
 
-
-public class Menu {
+public class DeathScreen {
 	
 	private Texture texture;
 	private Font font; 
 	private int currentChoice;
 	private Game game;
+	private int health;
 	
 	protected final String[] options = {
-			"Start",
-			"Help",
+			"continue",
 			"Quit"
 		};
 	
 	
-	public Menu(Game game) {
-		this.game = game;
-		texture = Game.getTexture();
+	public DeathScreen(Game gane){
+		this.game = gane;
+		this.texture = Game.getTexture();
 		currentChoice = 0;
 		
 		try{
@@ -35,42 +36,45 @@ public class Menu {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	
+	
+	public void update(){
+		
+		
 		
 	}
-
-
-	public void update() {
+	
+	
+	
+	public void render(Graphics g){
 		
-		
-	}
-
-
-	public void render(Graphics g) {
-		
-		g.drawImage(texture.menuBackground[0], 0, 0, Constants.GAME_WINDOW_WIDTH + 10, Constants.GAME_WINDOW_HEIGHT + 10, null);
+		g.setColor(new Color(0,0,0));
+		g.fillRect(0, 0, Constants.GAME_WINDOW_WIDTH, Constants.GAME_WINDOW_HEIGHT);
 		
 		g.setFont(font);
 		for(int i = 0; i < options.length; i++) {
 			if(i == currentChoice) {
-				g.setColor(Color.BLACK);
+				g.setColor(Color.RED);
 			}
 			else {
-				g.setColor(Color.RED);
+				g.setColor(Color.WHITE);
 			}
 			g.drawString(options[i], 500, 300 + i * 40);
 		}
 		
 		g.dispose();
+		
 	}
 	
-	
-	public void select(){
+	public void select(Manager manager, GameObject player){
 		if(currentChoice == 0){
+			player.setHelath(Constants.PLAYER_HEALTH);
 			game.setScreenState(ScreenState.Game);
 		}else if(currentChoice == 1){
-			
-		}else if(currentChoice == 2){
-			System.exit(0);
+			manager.mapReset();
+			game.setScreenState(ScreenState.Menu);
 		}
 		
 	}
@@ -87,13 +91,8 @@ public class Menu {
 		return options;
 	}
 	
-
-	
-
-
-
-
-	
-	
+	public void setHealth(int  health){
+		this.health = health;
+	}
 	
 }

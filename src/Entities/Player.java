@@ -21,6 +21,7 @@ import java.awt.Color;
 
 import Utils.Enums.Facing;
 import Utils.Enums.JumpState;
+import Utils.Enums.ScreenState;
 
 import java.awt.Graphics2D;
 import FrameWork.GameObject;
@@ -48,10 +49,13 @@ public class Player extends GameObject{
 	private int velocityHitX;
 	private GameObject portalA;
 	private GameObject portalB;
+	private Game game;
 	
-	public Player(float x, float y, Manager manager,ObjectId id){
+	public Player(float x, float y, Manager manager,ObjectId id,Game game){
 		super(x, y, id);
 		this.manager = manager;
+		this.game = game;
+		
 		texture = Game.getTexture();
 		
 		palyerjump   = new Animation(3, texture.player[8]);
@@ -69,7 +73,7 @@ public class Player extends GameObject{
 				texture.player[6], texture.player[7]
 				);
 				
-		playerRun   = new Animation(1,
+		playerRun   = new Animation(Constants.PLAYER_ANIMATION_RUNNING_SPEED,
 				texture.runnigS[0],texture.runnigS[1],
 				texture.runnigS[2],texture.runnigS[3],texture.runnigS[4],
 				texture.runnigS[5],texture.runnigS[6],texture.runnigS[7],
@@ -129,7 +133,7 @@ public class Player extends GameObject{
 	}
 
 	public void render(Graphics g){
-			
+		
 		/*Graphics2D g2d = (Graphics2D) g; 
 		g.setColor(Color.red);
 		g2d.draw(getBounds());
@@ -142,48 +146,67 @@ public class Player extends GameObject{
 					if(facing == Facing.RIGHT){
 						palyerFire.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH, 
 								(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					
 					}else{
 						palyerFire.drawAnimation(g, (int)x, (int)y,Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+						
 					}
 				}else{
-					if(facing == Facing.RIGHT)
+					if(facing == Facing.RIGHT){
 						palyerFall.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
-									(int)y, - Constants.PLAYER_RECTANGLE_WIDTH,Constants.PLAYER_RECTANGLE_HEIGHT);
+								(int)y, - Constants.PLAYER_RECTANGLE_WIDTH,Constants.PLAYER_RECTANGLE_HEIGHT);
+					
+					}
 					else if(facing == facing.LEFT)
 						palyerFall.drawAnimation(g,(int)x,(int)y,Constants.PLAYER_RECTANGLE_WIDTH,Constants.PLAYER_RECTANGLE_HEIGHT);
+				
 					}
 			}else{
 				if(crunch == false && fire == false){
 					if(velocity_X !=0){
-						if(facing == Facing.RIGHT)
+						if(facing == Facing.RIGHT){
 							playerRun.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
 									(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
-						else 
+							
+						}	
+						else{
 							playerRun.drawAnimation(g,(int)x,(int)y, Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+							
+						}
+							
 					}else{
-						if(facing == Facing.RIGHT)
+						if(facing == Facing.RIGHT){
 							playerIdle.drawAnimation(g,(int)x + Constants.PLAYER_RECTANGLE_WIDTH,
 									(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
-						else
+							
+						}else{
 							playerIdle.drawAnimation(g,(int)x,(int)y, Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+							
+						}
+							
 					}
 				}else if (crunch == true){
 					if(facing == Facing.RIGHT){
 						playerCrunch.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH, 
 								(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+					
 					}else{
 						playerCrunch.drawAnimation(g, (int)x, (int)y,Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+						
 					}
 				}else if(fire == true){
 					if(facing == Facing.RIGHT){
 						palyerFire.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH, 
 								(int)y, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+						
 					}else{
 						palyerFire.drawAnimation(g, (int)x, (int)y,Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+						
 					}
 				}
 			}	
-	
+			
+			
 	}
 
 	private void collision(){
@@ -233,22 +256,31 @@ public class Player extends GameObject{
 					if(getBoundsRight().intersects(gameObject.getBoundsLeft()))
 					{
 						if(hit == false){
-							 jumping = true;
-							 hit = true;
-							 health -= Constants.ENEMY_DAMAGE_POWER;
-							 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
-							 velocityHitX = -Constants.PLAYER_KNOCKBACK[1];
+							if(health > 0){
+								 jumping = true;
+								 hit = true;
+								 health -= Constants.ENEMY_DAMAGE_POWER + 20;
+								 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
+								 velocityHitX = -Constants.PLAYER_KNOCKBACK[1];
+							}else{
+								game.setScreenState(ScreenState.Death);
+							}
+
 						}	
 					}
 				
 					if(getBoundsLeft().intersects(gameObject.getBoundsRight()))
 					{	
 						 if(hit == false){
-							 jumping = true;
-							 hit = true;
-							 health -= Constants.ENEMY_DAMAGE_POWER;
-							 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
-							 velocityHitX = Constants.PLAYER_KNOCKBACK[1];
+							 if(health > 0){
+								 jumping = true;
+								 hit = true;
+								 health -= Constants.ENEMY_DAMAGE_POWER;
+								 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
+								 velocityHitX = Constants.PLAYER_KNOCKBACK[1];
+							 }else{
+								 game.setScreenState(ScreenState.Death);
+							 }
 						 }		
 					}
 				}
@@ -273,17 +305,21 @@ public class Player extends GameObject{
 
 		if(getBoundsRight().intersects(portalA.getBounds())){
 			x = portalB.getX() +  Constants.GAME_PORTAL_WIDTH;
+			y = portalB.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
 		}
 		if(getBoundsLeft().intersects(portalA.getBounds())){
 			x = portalB.getX() + Constants.GAME_PORTAL_WIDTH;
+			y = portalB.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
 		}
 		
 		if(getBoundsLeft().intersects(portalB.getBounds())){
-			x = portalA.getX() - Constants.GAME_PORTAL_WIDTH * 2;
+			x = portalA.getX() - (Constants.GAME_PORTAL_WIDTH * 2) - 30;
+			y = portalA.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
 		}
 	    if(getBoundsRight().intersects(portalB.getBounds())){
-			x = portalA.getX() - (Constants.PLAYER_RECTANGLE_WIDTH + Constants.GAME_PORTAL_WIDTH);
-			System.out.println("collide");
+			x = portalA.getX() - (Constants.PLAYER_RECTANGLE_WIDTH + Constants.GAME_PORTAL_WIDTH) - 30;
+			y = portalA.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
+		
 		}
 
 	}
@@ -332,6 +368,10 @@ public class Player extends GameObject{
 
 	public void select() {	}
 	
+
 	
+	public boolean getJump(){
+		return jumping;
+	}
 
 } 

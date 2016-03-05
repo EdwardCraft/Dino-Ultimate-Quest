@@ -52,7 +52,6 @@ public class Hud {
 		}   
 		
 		g.drawImage(hud, 0, 10,null);
-		
 	}
 		
 	
