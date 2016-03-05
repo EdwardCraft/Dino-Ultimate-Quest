@@ -161,15 +161,19 @@ public class Game extends Canvas implements Runnable{
 	    
 	    if(state == ScreenState.Game || state == ScreenState.Pause){
 	    	
-			graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
-			
-			   
+	    	if(playerCamera.getPositionX() < 0){
+	    		graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
+	    	}else{
+	    		graphics2D.translate( 0,playerCamera.getPositionY());
+	    	}
+	    	
+			    graphics.drawImage(texture.SkyBackground[0], 0, 30, null); 
 		    	manager.render(graphics);
-		    
-		    graphics2D.translate( -playerCamera.getPositionX(), -playerCamera.getPositionY());			
+		    	hud.render(graphics, playerCamera);
+		    graphics2D.translate( -playerCamera.getPositionX(),-playerCamera.getPositionY());			
 		   
-			hud.render(graphics);
-		
+		   
+	    	
 	    }
 
 

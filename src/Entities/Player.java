@@ -98,7 +98,7 @@ public class Player extends GameObject{
 
 	public void update(LinkedList<GameObject> object){
 		
-		if(health < 0){
+		if(health <= 0){
 			game.setScreenState(ScreenState.Death);
 		}
 		

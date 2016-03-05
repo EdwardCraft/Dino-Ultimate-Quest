@@ -11,13 +11,15 @@ import Entities.Manager;
 import Entities.Player;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
+import FrameWork.PlayerCam;
 import Utils.Constants;
 
 public class Hud {
 	
 	private BufferedImage hud;
 	private Manager manager;
-	
+	private GameObject gameObject;
+	private GameObject player;
 	public Hud(Manager manager){
 		
 		this.manager = manager;
@@ -40,19 +42,26 @@ public class Hud {
 		
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g, PlayerCam playerCamera) {
 		
 		g.setColor(new Color(1f,0f,0f,.7f));
 		
 		for(int i = 0; i < manager.gameObjects.size(); i++ ){
-			GameObject gameObject = manager.gameObjects.get(i);
+			gameObject = manager.gameObjects.get(i);
 			if(gameObject.getObjectId() == ObjectId.Player){
-				 g.fillRect(90,39,gameObject.getHealth(),40);    
-				
+				player = gameObject; 
+				break;
 			}
 		}   
 		
-		g.drawImage(hud, 0, 10,null);
+		if(playerCamera.getPositionX() < 0){
+			g.fillRect(-(int)playerCamera.getPositionX() + 91,-(int)playerCamera.getPositionY()+28,player.getHealth(),40); 
+			g.drawImage(hud, -(int)playerCamera.getPositionX(), -(int)playerCamera.getPositionY(),null);
+		}else{
+			g.fillRect(91,-(int)playerCamera.getPositionY()+28,player.getHealth(),40); 
+			g.drawImage(hud, 0, -(int)playerCamera.getPositionY(),null);
+		}
+
 		
 	}
 		
