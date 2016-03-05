@@ -1,11 +1,4 @@
-/FrameWork/
-/hud/
 /Classes/
-/Utils/
-/Entities/
-/Pause/
-/Player/
-/Monsters/
-/World/
 /Screens/
-/Main/
+/Entities/
+/Utils/

@@ -97,6 +97,11 @@ public class Player extends GameObject{
 
 
 	public void update(LinkedList<GameObject> object){
+		
+		if(health < 0){
+			game.setScreenState(ScreenState.Death);
+		}
+		
 		y +=velocity_Y;
 
 		if(crunch == false && fire == false && hit == false){
@@ -214,13 +219,13 @@ public class Player extends GameObject{
 		for(int i = 0; i < manager.gameObjects.size(); i++){
 			gameObject = manager.gameObjects.get(i);
 			if(gameObject.getObjectId() == ObjectId.Block){
-				//top collision
+				
 				if(getBoundsTop().intersects(gameObject.getBounds()))
 				{
 					y = gameObject.getY()+32;
 					velocity_Y =0;
 				}
-				//button half
+				
 				if(getBounds().intersects(gameObject.getBounds()))
 				{
 					y = gameObject.getY()-Constants.PLAYER_RECTANGLE_HEIGHT;
@@ -228,16 +233,16 @@ public class Player extends GameObject{
 					hit = false;
 					falling = false;
 					jumping = false;
-				//code lines for jumping	
+			
 				}else{
 					falling =true;
 				}
-				//code for Right
+
 				if(getBoundsRight().intersects(gameObject.getBounds()))
 				{
 					x = gameObject.getX() - Constants.PLAYER_RECTANGLE_WIDTH;
 				}
-				//code for left
+
 				if(getBoundsLeft().intersects(gameObject.getBounds()))
 				{
 					x = gameObject.getX() + 35;
@@ -259,7 +264,7 @@ public class Player extends GameObject{
 							if(health > 0){
 								 jumping = true;
 								 hit = true;
-								 health -= Constants.ENEMY_DAMAGE_POWER + 20;
+								 health -= Constants.ENEMY_DAMAGE_POWER;
 								 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
 								 velocityHitX = -Constants.PLAYER_KNOCKBACK[1];
 							}else{

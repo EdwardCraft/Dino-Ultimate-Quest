@@ -165,9 +165,9 @@ public class Game extends Canvas implements Runnable{
 			
 			   
 		    	manager.render(graphics);
-	
+		    
 		    graphics2D.translate( -playerCamera.getPositionX(), -playerCamera.getPositionY());			
-	    	
+		   
 			hud.render(graphics);
 		
 	    }

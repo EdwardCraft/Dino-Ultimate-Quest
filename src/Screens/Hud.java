@@ -47,11 +47,13 @@ public class Hud {
 		for(int i = 0; i < manager.gameObjects.size(); i++ ){
 			GameObject gameObject = manager.gameObjects.get(i);
 			if(gameObject.getObjectId() == ObjectId.Player){
-				 g.fillRect(90,39,gameObject.getHealth(),40);     
+				 g.fillRect(90,39,gameObject.getHealth(),40);    
+				
 			}
 		}   
 		
 		g.drawImage(hud, 0, 10,null);
+		
 	}
 		
 	
