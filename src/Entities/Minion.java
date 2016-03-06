@@ -63,7 +63,7 @@ public class Minion extends GameObject {
 	    if(facing == Facing.LEFT && hit == true){
 	    	x -= velocityHitX;
 	    }
-
+	    
 		if((falling || jumping)){
 			velocity_Y += Constants.PLAYER_GRAVITY_ACCELERATION;
 		}else{
@@ -107,7 +107,7 @@ public class Minion extends GameObject {
 
 				if(getBounds().intersects(tempObject.getBounds())){
 					y = tempObject.getY() - Constants.ENEMY_RECTANGLE_HEIGHT;
-					velocity_Y = Constants.ENEMY_JUMMP_HIGHT;
+					velocity_Y = 0;
 					falling = false;
 					jumping = false;
 					hit = false;
@@ -152,7 +152,7 @@ public class Minion extends GameObject {
 						hit = true;
 						facing = Facing.LEFT;
 						velocity_Y = -Constants.ENEMY_KNOCKBACK[0];
-						velocityHitX = -Constants.ENEMY_KNOCKBACK[1];
+						velocityHitX = +Constants.ENEMY_KNOCKBACK[1];
 					}
 				}
 			}

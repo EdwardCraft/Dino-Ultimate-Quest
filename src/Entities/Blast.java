@@ -21,11 +21,14 @@ public class Blast extends GameObject{
 	private Texture texture;
 	private Animation blast;
 	private int blastBoost;
-	private PlayerCam camera;
-	public Blast(float x, float y, ObjectId id, Facing facing, PlayerCam camera) {
+	private Manager manager;
+	private GameObject enemy;
+	private boolean visible;
+	public Blast(float x, float y, ObjectId id, Facing facing, Manager manager, boolean visible) {
 		super(x, y, id);
-		this.camera = camera;
 		this.facing = facing;
+		this.manager = manager;
+		this.visible = visible;
 		texture = Game.getTexture();
 		
 		blast = new Animation(1, texture.fire[0],
@@ -43,7 +46,7 @@ public class Blast extends GameObject{
 		}
 		
 		blast.runAnimation();
-	
+		collisionEnemy();
 	}
 
 	
@@ -56,16 +59,34 @@ public class Blast extends GameObject{
 		g2d.draw(getBoundsRight());
 		g2d.draw(getBoundsLeft());
 		
-		if(facing == Facing.RIGHT){
-			blast.drawAnimation(g, (int)x + Constants.BLAST_RECTANGLE_WIDTH / 2, 
-					(int)y + 10, - Constants.BLAST_RECTANGLE_WIDTH, Constants.BLAST_RECTANGLE_HEIGHT);
-		}else{
-			blast.drawAnimation(g, (int)x + Constants.BLAST_RECTANGLE_WIDTH / 2, 
-					(int)y + 10, Constants.BLAST_RECTANGLE_WIDTH, Constants.BLAST_RECTANGLE_HEIGHT);
+			if(facing == Facing.RIGHT){
+				blast.drawAnimation(g, (int)x + Constants.BLAST_RECTANGLE_WIDTH / 2, 
+						(int)y + 10, - Constants.BLAST_RECTANGLE_WIDTH, Constants.BLAST_RECTANGLE_HEIGHT);
+			}else{
+				blast.drawAnimation(g, (int)x + Constants.BLAST_RECTANGLE_WIDTH / 2, 
+						(int)y + 10, Constants.BLAST_RECTANGLE_WIDTH, Constants.BLAST_RECTANGLE_HEIGHT);
+	
 		}
+
+		
+	}
+	
+	private void collisionEnemy(){
+		for(int i = 0; i < manager.gameObjects.size(); i++){
+			GameObject gameObject = manager.gameObjects.get(i);
+			if(gameObject.getObjectId() == ObjectId.Enemy){
+				if(getBoundsRight().intersects(gameObject.getBoundsLeft())){
+					manager.removeObject(gameObject);
+					manager.removeObject(this);
+				}
+			}
+		}
+		
+
 		
 		
 	}
+	
 	
 	public Rectangle getBounds(){
 

@@ -50,6 +50,7 @@ public class Player extends GameObject{
 	private GameObject portalA;
 	private GameObject portalB;
 	private Game game;
+	private int found;
 	
 	public Player(float x, float y, Manager manager,ObjectId id,Game game){
 		super(x, y, id);
@@ -92,6 +93,7 @@ public class Player extends GameObject{
 		hit = false;
 		velocityHitX = 0;
 		health = Constants.PLAYER_HEALTH;
+		found = 0;
 	}
 
 
@@ -266,7 +268,7 @@ public class Player extends GameObject{
 								 hit = true;
 								 health -= Constants.ENEMY_DAMAGE_POWER;
 								 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
-								 velocityHitX = -Constants.PLAYER_KNOCKBACK[1];
+								 velocityHitX = -Constants.PLAYER_KNOCKBACK[1] * 2;
 							}else{
 								game.setScreenState(ScreenState.Death);
 							}
@@ -282,7 +284,7 @@ public class Player extends GameObject{
 								 hit = true;
 								 health -= Constants.ENEMY_DAMAGE_POWER;
 								 velocity_Y = -Constants.PLAYER_KNOCKBACK[0];
-								 velocityHitX = Constants.PLAYER_KNOCKBACK[1];
+								 velocityHitX = Constants.PLAYER_KNOCKBACK[1] * 2;
 							 }else{
 								 game.setScreenState(ScreenState.Death);
 							 }
@@ -305,27 +307,27 @@ public class Player extends GameObject{
 			}		
 			if(gameObject.getObjectId() == ObjectId.FlagB){
 				 portalB = gameObject;
-			}		
-		} 
-
-		if(getBoundsRight().intersects(portalA.getBounds())){
-			x = portalB.getX() +  Constants.GAME_PORTAL_WIDTH;
-			y = portalB.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
+			}
 		}
-		if(getBoundsLeft().intersects(portalA.getBounds())){
-			x = portalB.getX() + Constants.GAME_PORTAL_WIDTH;
-			y = portalB.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
-		}
-		
-		if(getBoundsLeft().intersects(portalB.getBounds())){
-			x = portalA.getX() - (Constants.GAME_PORTAL_WIDTH * 2) - 30;
-			y = portalA.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
-		}
-	    if(getBoundsRight().intersects(portalB.getBounds())){
-			x = portalA.getX() - (Constants.PLAYER_RECTANGLE_WIDTH + Constants.GAME_PORTAL_WIDTH) - 30;
-			y = portalA.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
-		
-		}
+	
+			if(getBoundsRight().intersects(portalA.getBounds())){
+				x = portalB.getX() +  Constants.GAME_PORTAL_WIDTH;
+				y = portalB.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
+			}
+			if(getBoundsLeft().intersects(portalA.getBounds())){
+				x = portalB.getX() + Constants.GAME_PORTAL_WIDTH;
+				y = portalB.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
+			}
+			
+			if(getBoundsLeft().intersects(portalB.getBounds())){
+				x = portalA.getX() - (Constants.GAME_PORTAL_WIDTH * 2) - 30;
+				y = portalA.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
+			}
+		    if(getBoundsRight().intersects(portalB.getBounds())){
+				x = portalA.getX() - (Constants.PLAYER_RECTANGLE_WIDTH + Constants.GAME_PORTAL_WIDTH) - 30;
+				y = portalA.getY() - Constants.PLAYER_RECTANGLE_HEIGHT;
+			
+			}	
 
 	}
 	
