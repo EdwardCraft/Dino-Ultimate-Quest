@@ -81,12 +81,12 @@ public class Minion extends GameObject {
 
 	public void render(Graphics g) {
 		
-		/*Graphics2D g2d = (Graphics2D) g; 
+		Graphics2D g2d = (Graphics2D) g; 
 		g.setColor(Color.red);
 		g2d.draw(getBounds());
 		g2d.draw(getBoundsRight());
 		g2d.draw(getBoundsLeft());
-		g2d.draw(getBoundsTop());*/
+		g2d.draw(getBoundsTop());
 		
 		if(facing == Facing.RIGHT){
 			monster.drawAnimation(g, (int)x, 
@@ -107,11 +107,11 @@ public class Minion extends GameObject {
 
 				if(getBounds().intersects(tempObject.getBounds())){
 					y = tempObject.getY() - Constants.ENEMY_RECTANGLE_HEIGHT;
-					velocity_Y = 0;
+					velocity_Y = Constants.ENEMY_JUMMP_HIGHT;
 					falling = false;
 					jumping = false;
 					hit = false;
-
+					
 				}else falling = true;
 
 				if(getBoundsTop().intersects(tempObject.getBounds())){

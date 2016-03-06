@@ -26,7 +26,7 @@ public class Texture{
 	public BufferedImage[] runnigS =  new BufferedImage[22];
 	public BufferedImage[] levels = new BufferedImage[3];
 	public BufferedImage[] levelBarckground = new BufferedImage[3];
-	public BufferedImage[] SkyBackground = new BufferedImage[3];
+	public BufferedImage[] Backgrounds = new BufferedImage[3];
 	public BufferedImage[] Menu = new BufferedImage[3];
 	public BufferedImage[] menuBackground = new BufferedImage[1];
 	public BufferedImage[] fireBreath = new BufferedImage[7];
@@ -44,8 +44,8 @@ public class Texture{
 			playerIdleSheet = imageloader.loadImage(Constants.PLAYER_IDLE_SPRITES);
 			palyerRunnigSheet = imageloader.loadImage(Constants.PLAYER_RUNNING_SPRITES);
 			dinofirePrepationSheet = imageloader.loadImage(Constants.PLAYER_FIRE_PREPARATION);
-			SkyBackground[0] = imageloader.loadImage(Constants.GAME_LEVEL_1_SKY);
-			SkyBackground[1] = imageloader.loadImage(Constants.GAME_LEVEL_1_TREES);
+			Backgrounds[0] = imageloader.loadImage(Constants.GAME_LEVEL_1_SKY);
+			Backgrounds[1] = imageloader.loadImage(Constants.GAME_LEVEL_1_BACKGROUND);
 			MenuSheet = imageloader.loadImage(Constants.GAME_MENU_SCREEN);
 			menuBackground[0] = imageloader.loadImage(Constants.GAME_MENU_BACKGROUND);
 			Level1Game = imageloader.loadImage(Constants.GAME_LEVEL_1_IMAGE);

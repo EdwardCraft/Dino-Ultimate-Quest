@@ -17,28 +17,33 @@ public class Constants {
 	public static final int PLAYER_HEALTH = 270;
 	public static final float PLAYER_GRAVITY_ACCELERATION = 0.5f;
 	public static final float PLAYER_MOVEMENT_SPEDD = 13;
-	public static final float PLAYER_ANIMATION_RUNNING_SPEED = 0.97f;
+	public static final float PLAYER_ANIMATION_RUNNING_SPEED = 1;
 	public static final float PLAYER_JUMP_HIGHT = 10;
 	public static final float PLAYER_MAX_SPEED = 10;
 	public static final String PLAYER_IDLE_SPRITES = "/Player/SriteSheetTirunt.png";
 	public static final String PLAYER_RUNNING_SPRITES  = "/Player/Running.png";
 	public static final String PLAYER_FIRE_PREPARATION = "/Player/fire-breath.png";
 	public static final String FIRE_BALL = "/Player/fire-blast.png";
-	public static final int FIRE_BALL_VELOCITY = 13;
+	public static final int FIRE_BALL_VELOCITY = 15;
 	// PLAYER_KNOCKBACK[0] is for the Y coordinate
 	//PLAYER_KNOCKBACK[1] is for the X coordinate
 	public static final int[] PLAYER_KNOCKBACK = { 7, 7};
 	
 	//enemy
 	public static final int ENEMY_ANIMATION_DURATION = 3;
+	public static final int ENEMY_JUMMP_HIGHT = -10;
 	public static final String ENEMY_SPRITE_SHEET= "/Monsters/enemy-1-anination.png";
-	public static final int ENEMY_RECTANGLE_WIDTH = 70;
-	public static final int ENEMY_RECTANGLE_HEIGHT = 70;
-	public static final int ENEMY_MOVEMENT_SPEED = - 5;
+	public static final int ENEMY_RECTANGLE_WIDTH = 500;
+	public static final int ENEMY_RECTANGLE_HEIGHT = 500;
+	public static final int ENEMY_MOVEMENT_SPEED = - 10;
 	public static final int ENEMY_DAMAGE_POWER = 50;
 	// ENEMY_KNOCKBACK[0] is for the Y coordinate
 	// ENEMY_KNOCKBACK[1] is for the X coordinate
 	public static final int[] ENEMY_KNOCKBACK = {7, 7};
+	
+	//blast 
+	public static final int BLAST_RECTANGLE_WIDTH = 100;
+	public static final int BLAST_RECTANGLE_HEIGHT = 100;
 	
 	
 	// Thread 
@@ -65,6 +70,7 @@ public class Constants {
 	public static final String GAME_LEVEL_1_TREES = "/World/lvl1.png";
 	public static final String GAME_HUD = "/HUD/hud-prototype.png";
 	public static final String GAME_PAUSE = "/Pause/pause.png";
+	public static final String GAME_LEVEL_1_BACKGROUND = "/World/level-1-background.png";
 }
 
 

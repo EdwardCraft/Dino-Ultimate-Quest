@@ -82,13 +82,14 @@ public class Manager{
 			tempObject = gameObjects.get(i);
 			tempObject.update(gameObjects);
 			if(tempObject.getObjectId() == ObjectId.Blast){
-				if(tempObject.getX() < 0){
-					removeObject(tempObject);					
-				}
-				if(tempObject.getX() > (Constants.GAME_WINDOW_WIDTH * 10)){
+				if(!camera.getBounds().contains(tempObject.getBoundsRight())){
 					removeObject(tempObject);
+					System.out.println("remove right");
 				}
-				
+				if(!camera.getBounds().contains(tempObject.getBoundsLeft())){
+					removeObject(tempObject);
+					System.out.println("remove left");
+				}
 			}
 		}
 		
@@ -145,6 +146,8 @@ public class Manager{
 
 	}
 
-
+	public PlayerCam getCamera(){
+		return camera;
+	}
 
 }

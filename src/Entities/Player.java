@@ -139,12 +139,12 @@ public class Player extends GameObject{
 
 	public void render(Graphics g){
 		
-		/*Graphics2D g2d = (Graphics2D) g; 
+		Graphics2D g2d = (Graphics2D) g; 
 		g.setColor(Color.red);
 		g2d.draw(getBounds());
 		g2d.draw(getBoundsRight());
 		g2d.draw(getBoundsLeft());
-		g2d.draw(getBoundsTop());*/
+		g2d.draw(getBoundsTop());
 		
 			if(jumping){
 				 if(fire == true){

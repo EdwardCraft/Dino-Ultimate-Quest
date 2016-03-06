@@ -1,6 +1,8 @@
 package Entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
@@ -8,6 +10,7 @@ import Classes.Game;
 import FrameWork.Animation;
 import FrameWork.GameObject;
 import FrameWork.ObjectId;
+import FrameWork.PlayerCam;
 import Utils.Constants;
 import Utils.Texture;
 import Utils.Enums.Facing;
@@ -18,10 +21,10 @@ public class Blast extends GameObject{
 	private Texture texture;
 	private Animation blast;
 	private int blastBoost;
-	
-	public Blast(float x, float y, ObjectId id, Facing facing) {
+	private PlayerCam camera;
+	public Blast(float x, float y, ObjectId id, Facing facing, PlayerCam camera) {
 		super(x, y, id);
-
+		this.camera = camera;
 		this.facing = facing;
 		texture = Game.getTexture();
 		
@@ -40,53 +43,68 @@ public class Blast extends GameObject{
 		}
 		
 		blast.runAnimation();
+	
 	}
 
+	
+	
 	@Override
 	public void render(Graphics g) {
+		
+		Graphics2D g2d = (Graphics2D) g; 
+		g.setColor(Color.red);
+		g2d.draw(getBoundsRight());
+		g2d.draw(getBoundsLeft());
+		
 		if(facing == Facing.RIGHT){
-			blast.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH / 2, 
-					(int)y + 10, - Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+			blast.drawAnimation(g, (int)x + Constants.BLAST_RECTANGLE_WIDTH / 2, 
+					(int)y + 10, - Constants.BLAST_RECTANGLE_WIDTH, Constants.BLAST_RECTANGLE_HEIGHT);
 		}else{
-			blast.drawAnimation(g, (int)x + Constants.PLAYER_RECTANGLE_WIDTH / 2, 
-					(int)y + 10, Constants.PLAYER_RECTANGLE_WIDTH, Constants.PLAYER_RECTANGLE_HEIGHT);
+			blast.drawAnimation(g, (int)x + Constants.BLAST_RECTANGLE_WIDTH / 2, 
+					(int)y + 10, Constants.BLAST_RECTANGLE_WIDTH, Constants.BLAST_RECTANGLE_HEIGHT);
 		}
 		
 		
 	}
-
-	@Override
-	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	public void setblastBoost(int blastBoost ){
-		this.blastBoost = blastBoost;
-	}
+	public Rectangle getBounds(){
 
-	@Override
-	public Rectangle getBoundsTop() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Rectangle getBoundsRight() {
-		// TODO Auto-generated method stub
+	public Rectangle getBoundsTop(){
+
 		return null;
 	}
 
-	@Override
-	public Rectangle getBoundsLeft() {
-		// TODO Auto-generated method stub
-		return null;
+	public Rectangle getBoundsRight(){
+
+		return new Rectangle(
+				(int)x + Constants.BLAST_RECTANGLE_WIDTH / 2,
+				(int)y + 34,
+				Constants.BLAST_RECTANGLE_WIDTH,
+				Constants.BLAST_RECTANGLE_HEIGHT - 40 
+			);
 	}
-	
+
+	public Rectangle getBoundsLeft(){
+
+		return new Rectangle(
+				(int)x - Constants.BLAST_RECTANGLE_WIDTH / 2 ,
+				(int)y + 34,
+				Constants.BLAST_RECTANGLE_WIDTH,
+				Constants.BLAST_RECTANGLE_HEIGHT - 40 
+			);
+	}
+
 	@Override
 	public void select() {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	
+	public void setblastBoost(int blastBoost ){
+		this.blastBoost = blastBoost;
+	}
 }

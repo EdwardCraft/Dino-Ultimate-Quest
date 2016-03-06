@@ -167,9 +167,10 @@ public class Game extends Canvas implements Runnable{
 	    		graphics2D.translate( 0,playerCamera.getPositionY());
 	    	}
 	    	
-			    graphics.drawImage(texture.SkyBackground[0], 0, 30, null); 
+			    graphics.drawImage(texture.Backgrounds[1], 0, 50,null); 
 		    	manager.render(graphics);
 		    	hud.render(graphics, playerCamera);
+		    	playerCamera.reder(graphics);
 		    graphics2D.translate( -playerCamera.getPositionX(),-playerCamera.getPositionY());			
 		   
 		   

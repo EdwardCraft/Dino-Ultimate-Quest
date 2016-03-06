@@ -55,7 +55,8 @@ public class KeyInput extends KeyAdapter{
 							manager.addObject(new Blast(gameObject.getX(), 
 									gameObject.getY(),
 									ObjectId.Blast, 
-									gameObject.getFacing()));
+									gameObject.getFacing(),
+									manager.getCamera()));
 							gameObject.setFire(true);
 						}
 						
