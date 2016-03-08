@@ -15,6 +15,7 @@ import FrameWork.ObjectId;
 import FrameWork.PlayerCam;
 import Screens.DeathScreen;
 import Screens.Hud;
+import Screens.LevelOne;
 import Screens.Menu;
 import Screens.Pause;
 import Entities.Player;
@@ -41,6 +42,7 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	private ScreenState state;
 	private DeathScreen deathScreen;
+	private LevelOne levelOne;
 	
 	public Game(){
 		
@@ -61,7 +63,7 @@ public class Game extends Canvas implements Runnable{
 		deathScreen = new DeathScreen(this);
 		this.addKeyListener(new KeyInput(manager, menu, deathScreen, this));
 		hud = new Hud(manager);
-		
+		levelOne = new LevelOne();
 		
 	}
 
@@ -156,22 +158,21 @@ public class Game extends Canvas implements Runnable{
 	    graphics2D = (Graphics2D) graphics;
 
 
-	    graphics.setColor(new Color(0,0,0));
+	    graphics.setColor(new Color(121,213,247));
 	    graphics.fillRect(0, 0, getWidth(), getHeight());
 	    
 	    if(state == ScreenState.Game || state == ScreenState.Pause){
 	    	
 	    	if(playerCamera.getPositionX() < 0){
-	    		graphics2D.translate( playerCamera.getPositionX(),playerCamera.getPositionY());
+	    		graphics2D.translate( playerCamera.getPositionX(), -Constants.GAME_CAM_OFFSET);
 	    	}else{
-	    		graphics2D.translate( 0,playerCamera.getPositionY());
+	    		graphics2D.translate( 0, -Constants.GAME_CAM_OFFSET);
 	    	}
-	    	
-			    graphics.drawImage(texture.Backgrounds[1], 0, 50,null); 
+	    		levelOne.render(graphics);
 		    	manager.render(graphics);
 		    	hud.render(graphics, playerCamera);
 		    	playerCamera.reder(graphics);
-		    graphics2D.translate( -playerCamera.getPositionX(),-playerCamera.getPositionY());			
+		    graphics2D.translate( -playerCamera.getPositionX(), +Constants.GAME_CAM_OFFSET);			
 		   
 		   
 	    	

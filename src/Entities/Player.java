@@ -276,7 +276,7 @@ public class Player extends GameObject{
 
 					
 					}
-				
+
 					if(getBoundsLeft().intersects(gameObject.getBoundsRight()))
 					{	
 						

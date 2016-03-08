@@ -26,7 +26,7 @@ public class PlayerCam {
 		position_Y += (int)((smothCameraY - position_Y) * (0.1));*/
 		
 		position_X = -player.getX() + Constants.GAME_WINDOW_WIDTH / 3;
-		position_Y = (int)(-player.getY() + (Constants.GAME_WINDOW_HEIGHT - (Constants.PLAYER_RECTANGLE_HEIGHT + 30)));
+		//position_Y = (int)(-player.getY() + (Constants.GAME_WINDOW_HEIGHT - (Constants.PLAYER_RECTANGLE_HEIGHT + 30)));
 
 		
 	
@@ -45,7 +45,7 @@ public class PlayerCam {
 		
 		return  new Rectangle(
 				-(int)position_X - Constants.BLAST_RECTANGLE_WIDTH + 20,
-				-(int)position_Y+5,
+				(int)Constants.GAME_CAM_OFFSET + 5,
 				(int)Constants.GAME_WINDOW_WIDTH + Constants.BLAST_RECTANGLE_WIDTH * 2,
 				(int)Constants.GAME_WINDOW_HEIGHT);
 	}

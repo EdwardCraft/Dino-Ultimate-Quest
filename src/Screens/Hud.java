@@ -55,11 +55,11 @@ public class Hud {
 		}   
 		
 		if(playerCamera.getPositionX() < 0){
-			g.fillRect(-(int)playerCamera.getPositionX() + 91,-(int)playerCamera.getPositionY()+28,player.getHealth(),40); 
-			g.drawImage(hud, -(int)playerCamera.getPositionX(), -(int)playerCamera.getPositionY(),null);
+			g.fillRect(-(int)playerCamera.getPositionX() + 91, (int)Constants.GAME_CAM_OFFSET + 56,player.getHealth(),40); 
+			g.drawImage(hud, -(int)playerCamera.getPositionX(), (int)Constants.GAME_CAM_OFFSET+28,null);
 		}else{
-			g.fillRect(91,-(int)playerCamera.getPositionY()+28,player.getHealth(),40); 
-			g.drawImage(hud, 0, -(int)playerCamera.getPositionY(),null);
+			g.fillRect(91,(int)Constants.GAME_CAM_OFFSET + 56,player.getHealth(),40); 
+			g.drawImage(hud, 0, (int)Constants.GAME_CAM_OFFSET + 28,null);
 		}
 
 		

@@ -10,6 +10,7 @@ public class Constants {
 	public static final int GAME_PORTAL_WIDTH = 50;
 	public static final int GAME_PORTAL_HEIGHT = 50;
 	public static final int GAME_PORTAL_OFFSET = GAME_PORTAL_WIDTH ;
+	public static final int GAME_CAM_OFFSET = 90;
 	
 	//Player
 	public static final int PLAYER_RECTANGLE_WIDTH = 100;
