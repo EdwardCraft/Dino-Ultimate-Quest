@@ -259,11 +259,12 @@ public class Player extends GameObject{
 			GameObject gameObject = manager.gameObjects.get(i);
 			 if(gameObject.getObjectId() == ObjectId.Enemy)
 			{
-				if(crunch == false){
+				if(crunch == false && hit == false){
 					if(getBoundsRight().intersects(gameObject.getBoundsLeft()))
 					{
-						if(hit == false){
+						
 							if(health > 0){
+								System.out.println("right");
 								 jumping = true;
 								 hit = true;
 								 health -= Constants.ENEMY_DAMAGE_POWER;
@@ -273,13 +274,14 @@ public class Player extends GameObject{
 								game.setScreenState(ScreenState.Death);
 							}
 
-						}	
+					
 					}
 				
 					if(getBoundsLeft().intersects(gameObject.getBoundsRight()))
 					{	
-						 if(hit == false){
+						
 							 if(health > 0){
+								 System.out.println("left");
 								 jumping = true;
 								 hit = true;
 								 health -= Constants.ENEMY_DAMAGE_POWER;
@@ -288,8 +290,9 @@ public class Player extends GameObject{
 							 }else{
 								 game.setScreenState(ScreenState.Death);
 							 }
-						 }		
+					
 					}
+					
 				}
 			}			 
 		}	

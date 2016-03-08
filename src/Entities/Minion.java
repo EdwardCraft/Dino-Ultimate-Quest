@@ -36,7 +36,7 @@ public class Minion extends GameObject {
 				texture.enemy[6], texture.enemy[7],
 				texture.enemy[8], texture.enemy[9]);
 		
-		facing = Facing.RIGHT;
+		facing = Facing.LEFT;
 		hit = false;
 		velocityHitX = 0;
 

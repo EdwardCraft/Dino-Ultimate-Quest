@@ -33,8 +33,8 @@ public class Constants {
 	public static final int ENEMY_ANIMATION_DURATION = 3;
 	public static final int ENEMY_JUMMP_HIGHT = -10;
 	public static final String ENEMY_SPRITE_SHEET= "/Monsters/enemy-1-anination.png";
-	public static final int ENEMY_RECTANGLE_WIDTH = 300;
-	public static final int ENEMY_RECTANGLE_HEIGHT = 300;
+	public static final int ENEMY_RECTANGLE_WIDTH = 100;
+	public static final int ENEMY_RECTANGLE_HEIGHT = 100;
 	public static final int ENEMY_MOVEMENT_SPEED = - 10;
 	public static final int ENEMY_DAMAGE_POWER = 50;
 	// ENEMY_KNOCKBACK[0] is for the Y coordinate
