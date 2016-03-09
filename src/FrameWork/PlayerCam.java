@@ -20,25 +20,17 @@ public class PlayerCam {
 
 
 	public void update(GameObject player){
-		/*float smothCameraX = -player.getX() + Constants.GAME_WINDOW_WIDTH / 6;
-		float smothCameraY = (float) (-player.getY() + (float)Constants.GAME_WINDOW_HEIGHT/ 1.25);
-		position_X += (int)((smothCameraX - position_X) * (0.1));
-		position_Y += (int)((smothCameraY - position_Y) * (0.1));*/
-		
+
 		position_X = -player.getX() + Constants.GAME_WINDOW_WIDTH / 3;
 		//position_Y = (int)(-player.getY() + (Constants.GAME_WINDOW_HEIGHT - (Constants.PLAYER_RECTANGLE_HEIGHT + 30)));
-
-		
 	
-		
-		
 	}
 	
 	public void reder(Graphics g){
-		Graphics2D g2d = (Graphics2D) g; 
+		/*Graphics2D g2d = (Graphics2D) g; 
 		g.setColor(Color.white);
 		g2d.draw(getBounds());
-		
+		*/
 	}
 	
 	public Rectangle getBounds(){

@@ -46,6 +46,9 @@ public class Constants {
 	public static final int BLAST_RECTANGLE_WIDTH = 100;
 	public static final int BLAST_RECTANGLE_HEIGHT = 100;
 	
+	//clouds
+	public static final int CLOUD_RECTANGLE_WIDTH = 200;
+	public static final int CLOUD_RECTANGLE_HEIGHT = 66;
 	
 	// Thread 
 	public static final double AMOUNT_OF_TICKS = 60.0f;
@@ -72,6 +75,8 @@ public class Constants {
 	public static final String GAME_HUD = "/HUD/hud-prototype.png";
 	public static final String GAME_PAUSE = "/Pause/pause.png";
 	public static final String GAME_LEVEL_1_BACKGROUND = "/World/level-1-background.png";
+	public static final String GAME_LEVEL_1_CLOUDS = "/World/clouds.png";
+	
 }
 
 

@@ -36,7 +36,6 @@ public class Game extends Canvas implements Runnable{
 	private Manager manager;
 	private PlayerCam playerCamera;
 	private Hud hud;
-	private GameAudio gameAudio;
 	static Texture texture;
 	private Pause pause;
 	private Menu menu;
@@ -46,13 +45,12 @@ public class Game extends Canvas implements Runnable{
 	
 	public Game(){
 		
-		running = false;
-		gameAudio = new GameAudio(Constants.GAME_LEVEL_1_AUDIO);
+		running = false;	
 		pause = new Pause();
 		state = ScreenState.Menu;
-		//gameAudio.play();
+		
 	}
-
+	
 
 	private void init(){
 		
@@ -66,7 +64,6 @@ public class Game extends Canvas implements Runnable{
 		levelOne = new LevelOne();
 		
 	}
-
 
 
 	public synchronized void start(){
@@ -100,7 +97,7 @@ public class Game extends Canvas implements Runnable{
 		delta += (now - lastTime) / Constants.NANO_SECONDS;
 		lastTime = now;
 		while(delta >= 1){
-			update();
+			update(delta);
 			updates++;
 			delta--;
 		}
@@ -119,19 +116,21 @@ public class Game extends Canvas implements Runnable{
 
 
 	//Everything  that updates;
-	private void update(){
-		
+	private void update(double delta){
+
 		if(state == ScreenState.Pause){
 			return;
 		}
 		
 		if(state == ScreenState.Game){
-			manager.update();	
+			manager.update();
+			levelOne.update(delta);
 			for(int i = 0; i < manager.gameObjects.size(); i++){
 				if(manager.gameObjects.get(i).getObjectId() == ObjectId.Player){
 					playerCamera.update(manager.gameObjects.get(i));
 				}
 			}	
+			
 		}
 		
 		if(state == ScreenState.Menu){
@@ -220,7 +219,9 @@ public class Game extends Canvas implements Runnable{
 		this.state = state;
 	}
 	
-	
+	public void setLevelOne(LevelOne levelOne){
+		this.levelOne = levelOne;
+	}
 	
 	
 }

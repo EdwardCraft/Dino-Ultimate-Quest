@@ -80,8 +80,8 @@ public class Texture{
 		
 		Menu[0] =  MenuSprite.grabImage(1, 1, 1, 1);
 			
-		block[0]   = blockSprite.grabImage(1,2,32,32);//dirt block
-		block[1]   = blockSprite.grabImage(2,2,32,32);// grass
+		block[0]   = blockSprite.grabImage(2,2,32,32);//dirt block
+		block[1]   = blockSprite.grabImage(1,2,32,32);// grass
 
 		for(int i = 0; i < 8 ; i++){
 			player[i]  = playerSpriteIdle.grabImage(i + 1, 1, 100, 100);// idle frame for player

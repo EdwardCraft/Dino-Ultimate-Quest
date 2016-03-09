@@ -75,6 +75,7 @@ public class DeathScreen {
 		}else if(currentChoice == 1){
 			manager.mapReset();
 			game.setScreenState(ScreenState.Menu);
+			game.setLevelOne(new LevelOne());
 		}
 		
 	}
