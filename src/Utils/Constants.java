@@ -12,6 +12,9 @@ public class Constants {
 	public static final int GAME_PORTAL_OFFSET = GAME_PORTAL_WIDTH ;
 	public static final int GAME_CAM_OFFSET = 90;
 	
+	//dialogue
+	public static final String GAME_DIALOGUE = "test.xml";
+	
 	//Player
 	public static final int PLAYER_RECTANGLE_WIDTH = 100;
 	public static final int PLAYER_RECTANGLE_HEIGHT = 100;

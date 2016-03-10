@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import Audio.GameAudio;
 import Classes.Game;
+import FrameWork.Dialogue;
 import Utils.Constants;
 import Utils.Texture;
 
@@ -21,13 +22,14 @@ public class LevelOne {
 	private int positionY;
 	private float velocityX;
 	private int velocityY;
-	
+	Dialogue dialogue;
 	public LevelOne(){
 		this.texture = Game.getTexture();
 		positionX = 600;
 		positionY = 0;
 		velocityX = 0.5f;
 		velocityY = 0;
+		dialogue = new Dialogue();
 		try {
 			cloud = ImageIO.read(
 				getClass().getResourceAsStream(

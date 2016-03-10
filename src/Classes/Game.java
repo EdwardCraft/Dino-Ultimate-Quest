@@ -173,8 +173,7 @@ public class Game extends Canvas implements Runnable{
 		    	playerCamera.reder(graphics);
 		    graphics2D.translate( -playerCamera.getPositionX(), +Constants.GAME_CAM_OFFSET);			
 		   
-		   
-	    	
+		  
 	    }
 
 
